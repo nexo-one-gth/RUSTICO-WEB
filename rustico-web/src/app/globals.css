@@ -1,0 +1,144 @@
+/* ── FONTS ───────────────────────────────────────────────── */
+@import '@fontsource/bebas-neue/index.css';
+@import '@fontsource-variable/plus-jakarta-sans/index.css';
+
+/* ── TAILWIND ────────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── DESIGN TOKENS CSS ───────────────────────────────────── */
+:root {
+  --font-bebas:   'Bebas Neue';
+  --font-jakarta: 'Plus Jakarta Sans Variable';
+
+  /* Brand colors */
+  --dark:   #2c1810;
+  --brown:  #5c3d2e;
+  --gold:   #c8a96e;
+  --green:  #4d7d35;
+  --olive:  #6b7a35;
+  --cream:  #f5f0e8;
+  --warm:   #e8dcc8;
+  --light:  #faf7f2;
+  --text:   #3a2a1e;
+  --sand:   #a89880;
+}
+
+/* ── BASE RESET ──────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--light);
+    color: var(--text);
+    font-family: var(--font-jakarta), sans-serif;
+  }
+
+  /* Sin border-radius en toda la marca */
+  * {
+    border-radius: 0 !important;
+  }
+  /* Excepto elementos full (highlights, avatares) */
+  .rounded-full { border-radius: 9999px !important; }
+  /* Botones redondeados */
+  .btn-primary, .btn-secondary, .btn-ghost, .btn-whatsapp { border-radius: 9999px !important; }
+}
+
+/* ── COMPONENTES REUTILIZABLES ───────────────────────────── */
+@layer components {
+
+  /* Botón primario — dorado */
+  .btn-primary {
+    @apply bg-rustico-gold text-rustico-dark font-body font-bold text-xs tracking-brand-sm uppercase px-8 py-4 transition-all duration-300;
+  }
+  .btn-primary:hover {
+    @apply bg-rustico-brown text-rustico-cream;
+  }
+
+  /* Botón secundario — borde oscuro */
+  .btn-secondary {
+    @apply border border-rustico-dark text-rustico-dark font-body font-bold text-xs tracking-brand-sm uppercase px-8 py-4 transition-all duration-300;
+  }
+  .btn-secondary:hover {
+    @apply bg-rustico-dark text-rustico-gold;
+  }
+
+  /* Botón fantasma — para usar sobre fondos oscuros */
+  .btn-ghost {
+    @apply border border-rustico-cream text-rustico-cream font-body font-bold text-xs tracking-brand-sm uppercase px-8 py-4 transition-all duration-300;
+  }
+  .btn-ghost:hover {
+    @apply bg-rustico-cream text-rustico-dark;
+  }
+
+  /* Botón WhatsApp — verde */
+  .btn-whatsapp {
+    @apply bg-rustico-green text-rustico-light font-body font-bold text-xs tracking-brand-sm uppercase px-8 py-4 transition-all duration-300;
+  }
+  .btn-whatsapp:hover {
+    @apply bg-rustico-olive;
+  }
+
+  /* Tag / Badge */
+  .tag {
+    @apply inline-block border border-rustico-gold text-rustico-gold font-body font-bold text-[9px] tracking-brand-sm uppercase px-3 py-1;
+  }
+  .tag-green {
+    @apply inline-block border border-rustico-green text-rustico-green font-body font-bold text-[9px] tracking-brand-sm uppercase px-3 py-1;
+  }
+
+  /* Divider dorado */
+  .divider-gold {
+    @apply w-10 h-px bg-rustico-gold;
+  }
+
+  /* Eyebrow label */
+  .eyebrow {
+    @apply font-body font-bold text-[10px] tracking-brand text-rustico-gold uppercase;
+  }
+
+  /* Heading display */
+  .heading-display {
+    @apply font-display text-rustico-dark leading-none tracking-brand-xs;
+  }
+
+  /* Card de producto */
+  .product-card {
+    @apply bg-rustico-light border border-rustico-warm overflow-hidden transition-all duration-300 shadow-card;
+  }
+  .product-card:hover {
+    @apply border-rustico-gold shadow-card-hover;
+  }
+
+  /* Input de formulario */
+  .form-input {
+    @apply w-full bg-white border border-rustico-warm text-rustico-text font-body text-sm px-4 py-3 outline-none transition-all duration-300;
+    @apply focus:border-rustico-gold focus:ring-0;
+    @apply placeholder:text-rustico-sand;
+  }
+}
+
+/* ── UTILIDADES ──────────────────────────────────────────── */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  /* Overlay gradiente estándar de la marca */
+  .overlay-dark {
+    background: linear-gradient(
+      to bottom,
+      rgba(44, 24, 16, 0) 25%,
+      rgba(44, 24, 16, 0.88) 75%,
+      rgba(44, 24, 16, 0.97) 100%
+    );
+  }
+
+  /* Scrollbar delgada */
+  .scrollbar-thin::-webkit-scrollbar { width: 4px; height: 4px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: var(--warm); }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: var(--gold); }
+}

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rústico — Opciones de Tipografía</title>
+
+  <!-- Opción 1: Fraunces + DM Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,400;1,9..144,700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <!-- Opción 2: Cormorant Garamond + Space Grotesk -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <!-- Opción 3: Syne + Lora -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <!-- Opción 4: Bebas Neue + Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <!-- Opción 5 (actual): Playfair Display + Lato — referencia -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --cream:  #f5f0e8;
+      --warm:   #e8dcc8;
+      --brown:  #5c3d2e;
+      --dark:   #2c1810;
+      --gold:   #c8a96e;
+      --text:   #3a2a1e;
+      --light:  #faf7f2;
+      --sand:   #a89880;
+      --green:  #4d7d35;
+      --olive:  #6b7a35;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #141414;
+      padding: 40px 24px 80px;
+      color: var(--text);
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .page-header .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .page-header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 38px;
+      font-weight: 400;
+      color: var(--cream);
+    }
+    .page-header p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: var(--sand);
+      margin-top: 8px;
+    }
+
+    /* ── OPCIÓN WRAPPER ── */
+    .option-block {
+      max-width: 1100px;
+      margin: 0 auto 72px;
+    }
+    .option-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      border-bottom: 1px solid #2a2a2a;
+      padding-bottom: 14px;
+      margin-bottom: 32px;
+    }
+    .option-num {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: #444;
+      text-transform: uppercase;
+    }
+    .option-name {
+      font-size: 18px;
+      color: var(--gold);
+    }
+    .option-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #444;
+      text-transform: uppercase;
+      margin-left: auto;
+    }
+    .option-tag.current { color: var(--olive); }
+
+    .cards-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    /* ── CARD BASE (4:5 mini, 220×275) ── */
+    .card {
+      width: 220px;
+      height: 275px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,.6);
+      flex-shrink: 0;
+    }
+    .card .bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+    }
+    .card .ov {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(44,24,16,0) 25%, rgba(44,24,16,.92) 85%);
+    }
+    .card .cc {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 18px 16px 18px;
+    }
+    .card .tag-pill {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 3px 9px;
+      margin-bottom: 8px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+    .card .price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(200,169,110,.3);
+    }
+
+    /* ── CREAM CARD (split layout) ── */
+    .card-cream {
+      width: 220px;
+      background: var(--light);
+      box-shadow: 0 20px 50px rgba(0,0,0,.6);
+      flex-shrink: 0;
+    }
+    .card-cream .img-top {
+      height: 140px;
+      overflow: hidden;
+    }
+    .card-cream .img-top img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .card-cream .body {
+      padding: 14px 16px 16px;
+    }
+    .card-cream .brand-eyebrow {
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+    .card-cream .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--warm);
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    /* ── STORY MINI (9:16 → 126×224) ── */
+    .story-mini {
+      width: 126px;
+      height: 224px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,.6);
+      flex-shrink: 0;
+    }
+    .story-mini .bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+    }
+    .story-mini .ov {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(44,24,16,.2) 0%, rgba(44,24,16,.7) 60%, rgba(44,24,16,.96) 100%);
+    }
+    .story-mini .sc {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 14px 12px 14px;
+    }
+
+    /* ── SPECS BOX ── */
+    .spec-box {
+      background: #111;
+      border: 1px solid #222;
+      padding: 20px 22px;
+      font-size: 11px;
+      color: #666;
+      line-height: 1.9;
+      width: 240px;
+      flex-shrink: 0;
+    }
+    .spec-box h4 {
+      font-size: 13px;
+      color: var(--gold);
+      margin-bottom: 14px;
+      font-weight: 400;
+    }
+    .spec-box strong { color: #aaa; font-weight: 500; }
+    .spec-box .vibe {
+      display: inline-block;
+      border: 1px solid #333;
+      color: #777;
+      font-size: 10px;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      margin: 3px 3px 3px 0;
+    }
+    .spec-box .vibe.green { border-color: var(--olive); color: var(--olive); }
+
+    /* ════════════════════════════════════════
+       OPCIÓN 1 — Fraunces + DM Sans
+    ════════════════════════════════════════ */
+    .f1-heading { font-family: 'Fraunces', serif; }
+    .f1-body    { font-family: 'DM Sans', sans-serif; }
+
+    /* ════════════════════════════════════════
+       OPCIÓN 2 — Cormorant Garamond + Space Grotesk
+    ════════════════════════════════════════ */
+    .f2-heading { font-family: 'Cormorant Garamond', serif; }
+    .f2-body    { font-family: 'Space Grotesk', sans-serif; }
+
+    /* ════════════════════════════════════════
+       OPCIÓN 3 — Syne + Lora
+    ════════════════════════════════════════ */
+    .f3-heading { font-family: 'Syne', sans-serif; }
+    .f3-body    { font-family: 'Lora', serif; }
+
+    /* ════════════════════════════════════════
+       OPCIÓN 4 — Bebas Neue + Plus Jakarta Sans
+    ════════════════════════════════════════ */
+    .f4-heading { font-family: 'Bebas Neue', sans-serif; }
+    .f4-body    { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    /* ════════════════════════════════════════
+       OPCIÓN 5 — Playfair Display + Lato (actual)
+    ════════════════════════════════════════ */
+    .f5-heading { font-family: 'Playfair Display', serif; }
+    .f5-body    { font-family: 'Lato', sans-serif; }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="eyebrow">Rústico · Brand Kit</div>
+    <h1>Opciones de Tipografía</h1>
+    <p>Cada opción aplicada a los mismos templates — feed dark, feed crema, story</p>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       OPCIÓN 1 — Fraunces + DM Sans
+       VIBE: artesanal moderno · calidez orgánica · joven sin ser juvenil
+  ════════════════════════════════════════════════════ -->
+  <div class="option-block">
+    <div class="option-header">
+      <span class="option-num">01</span>
+      <span class="option-name f1-heading">Fraunces + DM Sans</span>
+      <span class="option-tag" style="color:#c8a96e;">★ Recomendada</span>
+    </div>
+    <div class="cards-row">
+
+      <!-- Feed Dark -->
+      <div class="card">
+        <div class="bg" style="background-image:url('imagenes-catalogo/aparador-multicolor-salon.jpg')"></div>
+        <div class="ov"></div>
+        <div style="position:absolute;top:12px;right:14px;font-family:'Fraunces',serif;font-size:11px;font-style:italic;color:rgba(200,169,110,.65);">Rústico</div>
+        <div class="cc">
+          <div class="tag-pill f1-body" style="font-size:7px;">Pieza Única</div>
+          <div class="f1-heading" style="font-size:19px;font-weight:400;font-style:italic;color:var(--cream);line-height:1.15;margin-bottom:4px;">Aparador<br>Multicolor</div>
+          <div class="f1-body" style="font-size:9px;font-weight:300;color:var(--sand);letter-spacing:1px;">Madera restaurada · Hecho a mano</div>
+          <div class="price-row">
+            <span class="f1-heading" style="font-size:20px;color:var(--cream);">$160.000</span>
+            <span class="f1-body" style="font-size:8px;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">Envío GBA ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feed Crema -->
+      <div class="card-cream">
+        <div class="img-top">
+          <img src="imagenes-catalogo/mesa-arrime-atelier-blanca-living.jpg" alt="" />
+        </div>
+        <div class="body">
+          <div class="brand-eyebrow f1-body" style="font-size:8px;">Atelier · Muebles Únicos</div>
+          <div class="f1-heading" style="font-size:17px;font-style:italic;color:var(--dark);line-height:1.2;margin-bottom:3px;">Mesa de Arrime</div>
+          <div class="f1-body" style="font-size:10px;font-weight:300;color:var(--sand);">110 × 31 × 77 cm</div>
+          <div class="foot">
+            <span class="f1-heading" style="font-size:17px;color:var(--dark);">$160.000</span>
+            <span class="f1-body" style="background:var(--dark);color:var(--gold);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;font-weight:700;">Ver más →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story -->
+      <div class="story-mini">
+        <div class="bg" style="background-image:url('imagenes-catalogo/aparador-natural-living-flores.jpg')"></div>
+        <div class="ov"></div>
+        <div class="sc">
+          <div class="f1-heading" style="font-size:10px;font-style:italic;color:var(--gold);">Rústico</div>
+          <div>
+            <div class="f1-body" style="font-size:7px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Nueva pieza</div>
+            <div class="f1-heading" style="font-size:17px;font-style:italic;color:var(--cream);line-height:1.2;margin-bottom:6px;">¿Buscás algo que ninguno tenga?</div>
+            <div class="f1-body" style="font-size:8px;font-weight:300;color:var(--sand);margin-bottom:10px;">Madera restaurada · Hecho a mano</div>
+            <div class="f1-body" style="background:var(--gold);color:var(--dark);font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 10px;text-align:center;">Escribir al DM →</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-box">
+        <h4>Fraunces + DM Sans</h4>
+        <div style="margin-bottom:10px;">
+          <strong>Heading:</strong> Fraunces<br>
+          Serif óptico con personalidad, vetas de madera en las curvas.<br>
+          Italic muy expresivo.<br><br>
+          <strong>Body:</strong> DM Sans<br>
+          Grotesco humanista, legible, moderno sin ser frío.
+        </div>
+        <div style="margin-bottom:10px;">
+          <strong>Sensación:</strong><br>
+          <span class="vibe green">artesanal</span>
+          <span class="vibe green">orgánico</span>
+          <span class="vibe">moderno</span>
+          <span class="vibe">joven</span>
+        </div>
+        <div><strong>Disponible en Canva:</strong> ✓ Ambas<br>
+        <strong>En Google Fonts:</strong> ✓ Gratis</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       OPCIÓN 2 — Cormorant Garamond + Space Grotesk
+       VIBE: lujo delicado · editorial · tensión vieja/nueva
+  ════════════════════════════════════════════════════ -->
+  <div class="option-block">
+    <div class="option-header">
+      <span class="option-num">02</span>
+      <span class="option-name f2-heading" style="font-size:22px;">Cormorant Garamond + Space Grotesk</span>
+      <span class="option-tag">editorial · lujo</span>
+    </div>
+    <div class="cards-row">
+
+      <div class="card">
+        <div class="bg" style="background-image:url('imagenes-catalogo/aparador-multicolor-salon.jpg')"></div>
+        <div class="ov"></div>
+        <div style="position:absolute;top:12px;right:14px;font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;color:rgba(200,169,110,.65);">Rústico</div>
+        <div class="cc">
+          <div class="tag-pill f2-body" style="font-size:7px;">Pieza Única</div>
+          <div class="f2-heading" style="font-size:24px;font-weight:600;font-style:italic;color:var(--cream);line-height:1.1;margin-bottom:4px;">Aparador<br>Multicolor</div>
+          <div class="f2-body" style="font-size:9px;font-weight:300;color:var(--sand);letter-spacing:1px;">Madera restaurada · Hecho a mano</div>
+          <div class="price-row">
+            <span class="f2-heading" style="font-size:22px;color:var(--cream);">$160.000</span>
+            <span class="f2-body" style="font-size:7px;color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;">Envío GBA ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-cream">
+        <div class="img-top">
+          <img src="imagenes-catalogo/mesa-arrime-atelier-blanca-living.jpg" alt="" />
+        </div>
+        <div class="body">
+          <div class="brand-eyebrow f2-body" style="font-size:8px;">Atelier · Muebles Únicos</div>
+          <div class="f2-heading" style="font-size:20px;font-weight:600;font-style:italic;color:var(--dark);line-height:1.15;margin-bottom:3px;">Mesa de Arrime</div>
+          <div class="f2-body" style="font-size:10px;font-weight:300;color:var(--sand);">110 × 31 × 77 cm</div>
+          <div class="foot">
+            <span class="f2-heading" style="font-size:19px;color:var(--dark);">$160.000</span>
+            <span class="f2-body" style="background:var(--dark);color:var(--gold);font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:5px 10px;font-weight:700;">Ver más →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-mini">
+        <div class="bg" style="background-image:url('imagenes-catalogo/aparador-natural-living-flores.jpg')"></div>
+        <div class="ov"></div>
+        <div class="sc">
+          <div class="f2-heading" style="font-size:11px;font-style:italic;color:var(--gold);">Rústico</div>
+          <div>
+            <div class="f2-body" style="font-size:7px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;">Nueva pieza</div>
+            <div class="f2-heading" style="font-size:18px;font-style:italic;color:var(--cream);line-height:1.2;margin-bottom:6px;">¿Buscás algo que ninguno tenga?</div>
+            <div class="f2-body" style="font-size:8px;font-weight:300;color:var(--sand);margin-bottom:10px;">Madera restaurada · Hecho a mano</div>
+            <div class="f2-body" style="background:var(--gold);color:var(--dark);font-size:7px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 10px;text-align:center;">Escribir al DM →</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-box">
+        <h4>Cormorant + Space Grotesk</h4>
+        <div style="margin-bottom:10px;">
+          <strong>Heading:</strong> Cormorant Garamond<br>
+          Fino, delicado, muy elegante. Remite a lujo antiguo.<br><br>
+          <strong>Body:</strong> Space Grotesk<br>
+          Grotesco geométrico con quirks únicos. Contraste máximo con el serif.
+        </div>
+        <div style="margin-bottom:10px;">
+          <strong>Sensación:</strong><br>
+          <span class="vibe">lujoso</span>
+          <span class="vibe">editorial</span>
+          <span class="vibe">tenso</span>
+          <span class="vibe">refinado</span>
+        </div>
+        <div><strong>Disponible en Canva:</strong> ✓ Ambas<br>
+        <strong>En Google Fonts:</strong> ✓ Gratis</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       OPCIÓN 3 — Syne + Lora
+       VIBE: experimental · artista · taller creativo
+  ════════════════════════════════════════════════════ -->
+  <div class="option-block">
+    <div class="option-header">
+      <span class="option-num">03</span>
+      <span class="option-name f3-heading" style="font-weight:700;font-size:22px;">Syne + Lora</span>
+      <span class="option-tag">experimental · taller</span>
+    </div>
+    <div class="cards-row">
+
+      <div class="card">
+        <div class="bg" style="background-image:url('imagenes-catalogo/aparador-multicolor-salon.jpg')"></div>
+        <div class="ov"></div>
+        <div style="position:absolute;top:12px;right:14px;font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(200,169,110,.65);">Rústico</div>
+        <div class="cc">
+          <div class="tag-pill f3-body" style="font-size:7px;font-family:'Syne',sans-serif;font-weight:600;">Pieza Única</div>
+          <div class="f3-heading" style="font-size:21px;font-weight:800;color:var(--cream);line-height:1.1;margin-bottom:4px;">Aparador<br>Multicolor</div>
+          <div class="f3-body" style="font-size:9px;font-style:italic;color:var(--sand);">Madera restaurada · Hecho a mano</div>
+          <div class="price-row">
+            <span class="f3-heading" style="font-size:21px;font-weight:700;color:var(--cream);">$160.000</span>
+            <span class="f3-heading" style="font-size:8px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;">GBA ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-cream">
+        <div class="img-top">
+          <img src="imagenes-catalogo/mesa-arrime-atelier-blanca-living.jpg" alt="" />
+        </div>
+        <div class="body">
+          <div class="brand-eyebrow f3-heading" style="font-size:7px;font-weight:700;">Atelier · Muebles Únicos</div>
+          <div class="f3-heading" style="font-size:17px;font-weight:800;color:var(--dark);line-height:1.15;margin-bottom:3px;">Mesa de Arrime</div>
+          <div class="f3-body" style="font-size:10px;font-style:italic;color:var(--sand);">110 × 31 × 77 cm</div>
+          <div class="foot">
+            <span class="f3-heading" style="font-size:17px;font-weight:700;color:var(--dark);">$160.000</span>
+            <span class="f3-heading" style="background:var(--dark);color:var(--gold);font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;font-weight:700;">Ver →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-mini">
+        <div class="bg" style="background-image:url('imagenes-catalogo/aparador-natural-living-flores.jpg')"></div>
+        <div class="ov"></div>
+        <div class="sc">
+          <div class="f3-heading" style="font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);">Rústico</div>
+          <div>
+            <div class="f3-heading" style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;">Nueva</div>
+            <div class="f3-heading" style="font-size:17px;font-weight:800;color:var(--cream);line-height:1.15;margin-bottom:5px;">¿Buscás algo que ninguno tenga?</div>
+            <div class="f3-body" style="font-size:8px;font-style:italic;color:var(--sand);margin-bottom:10px;">Madera restaurada · Hecho a mano</div>
+            <div class="f3-heading" style="background:var(--gold);color:var(--dark);font-size:7px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 10px;text-align:center;">DM →</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-box">
+        <h4>Syne + Lora</h4>
+        <div style="margin-bottom:10px;">
+          <strong>Heading:</strong> Syne<br>
+          Geométrico experimental, Bold muy impactante. Muy de taller/estudio creativo.<br><br>
+          <strong>Body:</strong> Lora<br>
+          Serif cálido y legible. Invierte la lógica: el sans es heading, el serif es body.
+        </div>
+        <div style="margin-bottom:10px;">
+          <strong>Sensación:</strong><br>
+          <span class="vibe green">taller</span>
+          <span class="vibe green">creativo</span>
+          <span class="vibe">bold</span>
+          <span class="vibe">alternativo</span>
+        </div>
+        <div><strong>Disponible en Canva:</strong> ✓ Ambas<br>
+        <strong>En Google Fonts:</strong> ✓ Gratis</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       OPCIÓN 4 — Bebas Neue + Plus Jakarta Sans
+       VIBE: impacto comercial · precio visible · directo
+  ════════════════════════════════════════════════════ -->
+  <div class="option-block">
+    <div class="option-header">
+      <span class="option-num">04</span>
+      <span class="option-name f4-heading" style="font-size:28px;letter-spacing:1px;">Bebas Neue + Plus Jakarta Sans</span>
+      <span class="option-tag">impacto · precio</span>
+    </div>
+    <div class="cards-row">
+
+      <div class="card">
+        <div class="bg" style="background-image:url('imagenes-catalogo/aparador-multicolor-salon.jpg')"></div>
+        <div class="ov"></div>
+        <div style="position:absolute;top:12px;right:14px;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;color:rgba(200,169,110,.65);">Rústico</div>
+        <div class="cc">
+          <div class="tag-pill f4-body" style="font-size:7px;font-weight:700;">Pieza Única</div>
+          <div class="f4-heading" style="font-size:30px;letter-spacing:2px;color:var(--cream);line-height:1;margin-bottom:4px;">Aparador<br>Multicolor</div>
+          <div class="f4-body" style="font-size:9px;font-weight:300;color:var(--sand);letter-spacing:.5px;">Madera restaurada · Hecho a mano</div>
+          <div class="price-row">
+            <span class="f4-heading" style="font-size:28px;letter-spacing:1px;color:var(--gold);">$160.000</span>
+            <span class="f4-body" style="font-size:8px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;">GBA ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-cream">
+        <div class="img-top">
+          <img src="imagenes-catalogo/mesa-arrime-atelier-blanca-living.jpg" alt="" />
+        </div>
+        <div class="body">
+          <div class="brand-eyebrow f4-body" style="font-size:8px;font-weight:700;">Atelier · Muebles Únicos</div>
+          <div class="f4-heading" style="font-size:22px;letter-spacing:1px;color:var(--dark);line-height:1;margin-bottom:3px;">Mesa de Arrime</div>
+          <div class="f4-body" style="font-size:10px;font-weight:300;color:var(--sand);">110 × 31 × 77 cm</div>
+          <div class="foot">
+            <span class="f4-heading" style="font-size:22px;letter-spacing:1px;color:var(--gold);">$160.000</span>
+            <span class="f4-body" style="background:var(--dark);color:var(--gold);font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;font-weight:700;">DM →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-mini">
+        <div class="bg" style="background-image:url('imagenes-catalogo/aparador-natural-living-flores.jpg')"></div>
+        <div class="ov"></div>
+        <div class="sc">
+          <div class="f4-heading" style="font-size:12px;letter-spacing:3px;color:var(--gold);">Rústico</div>
+          <div>
+            <div class="f4-body" style="font-size:7px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Nueva pieza</div>
+            <div class="f4-heading" style="font-size:20px;letter-spacing:1px;color:var(--cream);line-height:1;margin-bottom:5px;">¿Buscás algo que ninguno tenga?</div>
+            <div class="f4-body" style="font-size:8px;font-weight:300;color:var(--sand);margin-bottom:10px;">Madera restaurada · Hecho a mano</div>
+            <div class="f4-body" style="background:var(--gold);color:var(--dark);font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 10px;text-align:center;">Escribir al DM →</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-box">
+        <h4>Bebas Neue + Jakarta Sans</h4>
+        <div style="margin-bottom:10px;">
+          <strong>Heading:</strong> Bebas Neue<br>
+          Condensado, todo mayúsculas. Muy impactante para precios y títulos.<br><br>
+          <strong>Body:</strong> Plus Jakarta Sans<br>
+          Grotesco moderno y legible. Muy versátil.
+        </div>
+        <div style="margin-bottom:10px;">
+          <strong>Sensación:</strong><br>
+          <span class="vibe">comercial</span>
+          <span class="vibe">directo</span>
+          <span class="vibe">precio-foco</span>
+          <span class="vibe green">bold</span>
+        </div>
+        <div><strong>Disponible en Canva:</strong> ✓ Ambas<br>
+        <strong>En Google Fonts:</strong> ✓ Gratis<br><br>
+        <strong>⚠ Nota:</strong> Bebas solo tiene mayúsculas — no sirve para texto corrido largo.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       OPCIÓN 5 — Playfair Display + Lato (ACTUAL — referencia)
+  ════════════════════════════════════════════════════ -->
+  <div class="option-block">
+    <div class="option-header">
+      <span class="option-num">05</span>
+      <span class="option-name f5-heading" style="font-style:italic;">Playfair Display + Lato</span>
+      <span class="option-tag current">▶ Actual</span>
+    </div>
+    <div class="cards-row">
+
+      <div class="card">
+        <div class="bg" style="background-image:url('imagenes-catalogo/aparador-multicolor-salon.jpg')"></div>
+        <div class="ov"></div>
+        <div style="position:absolute;top:12px;right:14px;font-family:'Playfair Display',serif;font-size:11px;font-style:italic;color:rgba(200,169,110,.65);">Rústico</div>
+        <div class="cc">
+          <div class="tag-pill f5-body" style="font-size:7px;">Pieza Única</div>
+          <div class="f5-heading" style="font-size:19px;font-weight:400;font-style:italic;color:var(--cream);line-height:1.15;margin-bottom:4px;">Aparador<br>Multicolor</div>
+          <div class="f5-body" style="font-size:9px;font-weight:300;color:var(--sand);letter-spacing:1px;">Madera restaurada · Hecho a mano</div>
+          <div class="price-row">
+            <span class="f5-heading" style="font-size:20px;color:var(--cream);">$160.000</span>
+            <span class="f5-body" style="font-size:8px;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">Envío GBA ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-cream">
+        <div class="img-top">
+          <img src="imagenes-catalogo/mesa-arrime-atelier-blanca-living.jpg" alt="" />
+        </div>
+        <div class="body">
+          <div class="brand-eyebrow f5-body" style="font-size:8px;">Atelier · Muebles Únicos</div>
+          <div class="f5-heading" style="font-size:17px;font-style:italic;color:var(--dark);line-height:1.2;margin-bottom:3px;">Mesa de Arrime</div>
+          <div class="f5-body" style="font-size:10px;font-weight:300;color:var(--sand);">110 × 31 × 77 cm</div>
+          <div class="foot">
+            <span class="f5-heading" style="font-size:17px;color:var(--dark);">$160.000</span>
+            <span class="f5-body" style="background:var(--dark);color:var(--gold);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;font-weight:700;">Ver más →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-mini">
+        <div class="bg" style="background-image:url('imagenes-catalogo/aparador-natural-living-flores.jpg')"></div>
+        <div class="ov"></div>
+        <div class="sc">
+          <div class="f5-heading" style="font-size:10px;font-style:italic;color:var(--gold);">Rústico</div>
+          <div>
+            <div class="f5-body" style="font-size:7px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Nueva pieza</div>
+            <div class="f5-heading" style="font-size:16px;font-style:italic;color:var(--cream);line-height:1.2;margin-bottom:6px;">¿Buscás algo que ninguno tenga?</div>
+            <div class="f5-body" style="font-size:8px;font-weight:300;color:var(--sand);margin-bottom:10px;">Madera restaurada · Hecho a mano</div>
+            <div class="f5-body" style="background:var(--gold);color:var(--dark);font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 10px;text-align:center;">Escribir al DM →</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-box">
+        <h4>Playfair Display + Lato</h4>
+        <div style="margin-bottom:10px;">
+          <strong>Heading:</strong> Playfair Display<br>
+          Serif clásico elegante. Funciona bien pero puede sentirse un poco anticuado.<br><br>
+          <strong>Body:</strong> Lato<br>
+          Humanista neutro. Muy seguro, muy poco diferencial.
+        </div>
+        <div style="margin-bottom:10px;">
+          <strong>Sensación:</strong><br>
+          <span class="vibe">clásico</span>
+          <span class="vibe">elegante</span>
+          <span class="vibe">seguro</span>
+          <span class="vibe">genérico</span>
+        </div>
+        <div><strong>Disponible en Canva:</strong> ✓ Ambas<br>
+        <strong>En Google Fonts:</strong> ✓ Gratis</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       TABLA RESUMEN
+  ════════════════════════════════════════════════════ -->
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="border-bottom:1px solid #2a2a2a;padding-bottom:14px;margin-bottom:28px;">
+      <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:4px;color:#444;text-transform:uppercase;">Resumen</span>
+      <span style="font-family:'Fraunces',serif;font-size:22px;color:var(--gold);margin-left:16px;">Comparativa</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-family:'DM Sans',sans-serif;font-size:12px;color:#666;">
+        <thead>
+          <tr style="border-bottom:1px solid #2a2a2a;">
+            <th style="text-align:left;padding:10px 14px;color:#444;font-weight:500;letter-spacing:2px;text-transform:uppercase;font-size:10px;">#</th>
+            <th style="text-align:left;padding:10px 14px;color:#444;font-weight:500;letter-spacing:2px;text-transform:uppercase;font-size:10px;">Fuente</th>
+            <th style="text-align:left;padding:10px 14px;color:#444;font-weight:500;letter-spacing:2px;text-transform:uppercase;font-size:10px;">Vibe</th>
+            <th style="text-align:left;padding:10px 14px;color:#444;font-weight:500;letter-spacing:2px;text-transform:uppercase;font-size:10px;">Ideal para</th>
+            <th style="text-align:left;padding:10px 14px;color:#444;font-weight:500;letter-spacing:2px;text-transform:uppercase;font-size:10px;">Canva</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1e1e1e;background:#161616;">
+            <td style="padding:12px 14px;color:var(--gold);font-weight:700;">01 ★</td>
+            <td style="padding:12px 14px;color:#bbb;">Fraunces + DM Sans</td>
+            <td style="padding:12px 14px;">Artesanal moderno · orgánico · joven</td>
+            <td style="padding:12px 14px;">Feed, Stories, Reel, todo uso</td>
+            <td style="padding:12px 14px;color:var(--olive);">✓ Ambas</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1e1e1e;">
+            <td style="padding:12px 14px;">02</td>
+            <td style="padding:12px 14px;color:#bbb;">Cormorant + Space Grotesk</td>
+            <td style="padding:12px 14px;">Lujo delicado · editorial</td>
+            <td style="padding:12px 14px;">Si querés ir a un público más premium/decoradores</td>
+            <td style="padding:12px 14px;color:var(--olive);">✓ Ambas</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1e1e1e;background:#161616;">
+            <td style="padding:12px 14px;">03</td>
+            <td style="padding:12px 14px;color:#bbb;">Syne + Lora</td>
+            <td style="padding:12px 14px;">Taller creativo · experimental</td>
+            <td style="padding:12px 14px;">Si el foco es mostrar el proceso / behind the scenes</td>
+            <td style="padding:12px 14px;color:var(--olive);">✓ Ambas</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1e1e1e;">
+            <td style="padding:12px 14px;">04</td>
+            <td style="padding:12px 14px;color:#bbb;">Bebas Neue + Jakarta Sans</td>
+            <td style="padding:12px 14px;">Impacto comercial · precio como héroe</td>
+            <td style="padding:12px 14px;">Price list, promos, lanzamientos</td>
+            <td style="padding:12px 14px;color:var(--olive);">✓ Ambas</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1e1e1e;background:#161616;">
+            <td style="padding:12px 14px;color:#444;">05</td>
+            <td style="padding:12px 14px;color:#555;">Playfair + Lato (actual)</td>
+            <td style="padding:12px 14px;color:#444;">Clásico · seguro · genérico</td>
+            <td style="padding:12px 14px;color:#444;">Referencia base</td>
+            <td style="padding:12px 14px;color:#555;">✓ Ambas</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#444;margin-top:18px;line-height:1.7;">
+      💡 <strong style="color:#666;">Tip:</strong> También se puede hacer un sistema mixto —
+      usar <strong style="color:var(--gold)">Fraunces</strong> como heading principal
+      y reservar <strong style="color:var(--gold)">Bebas Neue</strong> solo para precios y números,
+      con <strong style="color:var(--gold)">DM Sans</strong> para todo el body text.
+    </div>
+  </div>
+
+</body>
+</html>

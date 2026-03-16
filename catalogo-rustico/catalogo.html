@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rustico — Muebles Unicos de Madera Restaurada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --dark:   #2c1810;
+      --gold:   #c8a96e;
+      --green:  #4d7d35;
+      --brown:  #5c3d2e;
+      --cream:  #f5f0e8;
+      --warm:   #e8dcc8;
+      --sand:   #a89880;
+      --base:   #faf7f2;
+      --text:   #3a2a1e;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--base); color:var(--text); }
+
+    /* ── HEADER ── */
+    .header {
+      background:var(--dark);
+      padding:72px 24px 60px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .header::before {
+      content:'';
+      position:absolute; inset:0;
+      background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c8a96e' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .logo-wrap { position:relative; margin-bottom:28px; }
+    .logo-wrap img { height:110px; width:auto; }
+    .header-tag {
+      font-size:11px; letter-spacing:5px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:14px; position:relative;
+    }
+    .header h1 {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(52px,10vw,96px);
+      letter-spacing:4px;
+      color:var(--cream);
+      line-height:1;
+      margin-bottom:10px;
+      position:relative;
+    }
+    .header h1 span { color:var(--gold); }
+    .header-sub {
+      font-size:13px; font-weight:300; letter-spacing:3px;
+      color:var(--sand); margin-bottom:32px; position:relative;
+    }
+    .header-line { width:48px; height:1px; background:var(--gold); margin:0 auto 22px; position:relative; }
+    .header-desc {
+      max-width:520px; margin:0 auto;
+      font-size:15px; font-weight:300; line-height:1.9;
+      color:#9a8870; position:relative;
+    }
+
+    /* ── PROMO ── */
+    .promo {
+      background:var(--gold); color:var(--dark);
+      text-align:center; padding:12px 20px;
+      font-family:'Plus Jakarta Sans',sans-serif;
+      font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background:#fff; border-bottom:1px solid var(--warm);
+      display:flex; overflow-x:auto; scrollbar-width:none;
+      position:sticky; top:0; z-index:100;
+    }
+    .nav::-webkit-scrollbar { display:none; }
+    .nav a {
+      padding:16px 20px; font-size:11px; font-weight:700;
+      letter-spacing:2px; text-transform:uppercase;
+      color:var(--sand); text-decoration:none; white-space:nowrap;
+      border-bottom:2px solid transparent;
+      transition:color .2s, border-color .2s;
+    }
+    .nav a:hover { color:var(--brown); border-color:var(--gold); }
+
+    /* ── SECCION LABEL ── */
+    .s-wrap { padding:72px 24px 0; }
+    .s-label { text-align:center; margin-bottom:48px; }
+    .tag {
+      display:inline-block; border:1px solid var(--gold);
+      color:var(--gold); font-size:10px; font-weight:700;
+      letter-spacing:4px; text-transform:uppercase;
+      padding:5px 14px; margin-bottom:14px;
+    }
+    .s-label h2 {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(32px,6vw,56px);
+      letter-spacing:2px; color:var(--dark);
+    }
+    .s-label p { font-size:14px; color:var(--sand); margin-top:8px; line-height:1.7; max-width:440px; margin-left:auto; margin-right:auto; }
+
+    /* ── HERO PRODUCTO ── */
+    .hero {
+      display:grid; grid-template-columns:1.1fr 1fr;
+      max-width:1100px; margin:0 auto 80px;
+      border:1px solid #e0d8cc;
+      box-shadow:0 24px 64px rgba(44,24,16,.13);
+      overflow:hidden;
+    }
+    @media(max-width:700px){ .hero { grid-template-columns:1fr; } }
+
+    .hero-img { position:relative; min-height:520px; background:var(--warm); }
+    .hero-img img { width:100%; height:100%; object-fit:cover; display:block; }
+    .hero-badge {
+      position:absolute; top:20px; left:20px;
+      background:var(--dark); color:var(--gold);
+      font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+      padding:6px 14px;
+    }
+
+    .hero-info { background:var(--cream); padding:52px 46px; display:flex; flex-direction:column; justify-content:center; }
+    .p-tag { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+    .hero-info h3 {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(30px,4vw,44px); letter-spacing:2px;
+      color:var(--dark); line-height:1.1; margin-bottom:8px;
+    }
+    .dims { font-size:13px; color:var(--sand); letter-spacing:1px; margin-bottom:22px; }
+    .gold-bar { width:40px; height:2px; background:var(--gold); margin-bottom:22px; }
+    .hero-desc { font-size:14px; font-weight:300; line-height:1.9; color:#5a4a3a; margin-bottom:30px; }
+
+    .specs { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:30px; }
+    .spec { background:#fff; border-left:3px solid var(--gold); padding:10px 14px; }
+    .spec-lbl { font-size:10px; text-transform:uppercase; letter-spacing:2px; color:var(--sand); }
+    .spec-val { font-size:14px; font-weight:700; color:var(--dark); margin-top:2px; }
+
+    .price-box { background:var(--dark); padding:26px 30px; position:relative; overflow:hidden; }
+    .price-box::after {
+      content:''; position:absolute; right:-20px; top:-20px;
+      width:110px; height:110px; border-radius:50%;
+      background:rgba(200,169,110,.1);
+    }
+    .price-lbl { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+    .price-num {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:52px; letter-spacing:2px; color:#fff; line-height:1; margin-bottom:4px;
+    }
+    .price-sub { font-size:12px; color:#c9bfaf; }
+    .ref-price { margin-top:10px; font-size:12px; color:#6a6058; text-decoration:line-through; }
+    .savings {
+      display:inline-block; background:var(--gold); color:var(--dark);
+      font-size:11px; font-weight:700; padding:3px 10px; margin-top:8px;
+    }
+
+    /* ── THUMBNAIL STRIP ── */
+    .thumb-strip {
+      display:flex; gap:10px; flex-wrap:wrap;
+      max-width:1100px; margin:0 auto 80px; padding:0 24px;
+    }
+    .thumb {
+      flex:1; min-width:160px; max-width:220px;
+      border:1px solid #e0d8cc; overflow:hidden; cursor:pointer;
+      transition:transform .25s, box-shadow .25s;
+    }
+    .thumb:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(44,24,16,.12); }
+    .thumb img { width:100%; height:150px; object-fit:cover; display:block; }
+
+    /* ── GRID PRODUCTOS ── */
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:28px; max-width:1140px; margin:0 auto 80px; padding:0 24px;
+    }
+    .card { background:#fff; border:1px solid var(--warm); overflow:hidden; transition:transform .28s, box-shadow .28s; }
+    .card:hover { transform:translateY(-5px); box-shadow:0 18px 44px rgba(44,24,16,.12); }
+    .card-img { overflow:hidden; background:var(--warm); }
+    .card-img img { width:100%; display:block; transition:transform .4s; }
+    .card:hover .card-img img { transform:scale(1.04); }
+    .card-img.h260 { height:260px; }
+    .card-img.h260 img { height:100%; object-fit:cover; }
+    .card-img.h300 { height:300px; }
+    .card-img.h300 img { height:100%; object-fit:cover; }
+
+    .card-body { padding:22px 24px 26px; }
+    .c-tag { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+    .card-body h4 { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:1px; color:var(--dark); margin-bottom:6px; }
+    .c-desc { font-size:13px; font-weight:300; color:#6a5a4a; line-height:1.7; margin-bottom:10px; }
+    .c-note { font-size:11px; color:var(--sand); }
+    .c-cta {
+      display:inline-block; margin-top:14px;
+      background:var(--dark); color:var(--gold);
+      font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+      padding:8px 16px; text-decoration:none;
+    }
+
+    /* ── FEATURES ── */
+    .features { background:var(--dark); padding:80px 24px; text-align:center; }
+    .features h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,5vw,52px); letter-spacing:2px; color:var(--cream); margin-bottom:52px; }
+    .f-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:36px; max-width:880px; margin:0 auto; }
+    .f-item { }
+    .f-icon {
+      width:56px; height:56px; border:1px solid var(--gold);
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      margin:0 auto 16px; color:var(--gold);
+    }
+    .f-item h4 { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+    .f-item p { font-size:13px; font-weight:300; color:#9a8870; line-height:1.8; }
+
+    /* ── CTA ── */
+    .cta { background:var(--cream); padding:80px 24px; text-align:center; }
+    .cta h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,6vw,64px); letter-spacing:2px; color:var(--dark); margin-bottom:12px; }
+    .cta p { font-size:15px; font-weight:300; color:var(--brown); max-width:440px; margin:0 auto 36px; line-height:1.8; }
+    .btn-wa {
+      display:inline-flex; align-items:center; gap:12px;
+      background:#25D366; color:#fff;
+      padding:18px 40px; text-decoration:none;
+      font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+      transition:background .2s;
+    }
+    .btn-wa:hover { background:#1aad52; }
+    .cta-note { font-size:12px; color:var(--sand); margin-top:20px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background:#1a0e08; color:#6a6058;
+      text-align:center; padding:48px 24px;
+      font-size:13px; font-weight:300; line-height:2;
+    }
+    footer .f-logo { height:70px; width:auto; margin-bottom:16px; opacity:.8; }
+    footer strong { color:var(--gold); }
+
+    @media(max-width:560px){
+      .hero-info { padding:32px 24px; }
+      .specs { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="header">
+  <div class="logo-wrap">
+    <img src="imagenes/logo.png" alt="Rustico — Muebles Unicos de Madera Restaurada" />
+  </div>
+  <p class="header-tag">Coleccion 2024</p>
+  <h1>Cada pieza<br><span>tiene una historia</span></h1>
+  <p class="header-sub">Maderas restauradas &middot; Hecho a mano &middot; Piezas unicas</p>
+  <div class="header-line"></div>
+  <p class="header-desc">
+    Creamos muebles unicos en nuestro taller, donde el tiempo y la madera se combinan
+    para darle a tu espacio ese toque autentico, calido y verdaderamente singular que estas buscando.
+  </p>
+</header>
+
+<div class="promo">
+  Envio incluido en todo el GBA &nbsp;·&nbsp; Precio final sin sorpresas &nbsp;·&nbsp; Piezas unicas
+</div>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <a href="#arrime">Mesa de Arrime</a>
+  <a href="#tv">Rack TV</a>
+  <a href="#nosotros">Por que elegirnos</a>
+  <a href="#contacto">Contacto</a>
+</nav>
+
+
+<!-- ══ MESA DE ARRIME — HERO ══ -->
+<section id="arrime">
+  <div class="s-wrap">
+    <div class="s-label">
+      <div class="tag">Producto estrella</div>
+      <h2>Mesa de Arrime Atelier</h2>
+      <p>Precio de lanzamiento con envio incluido en todo el GBA</p>
+    </div>
+  </div>
+
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px 0;">
+    <div class="hero">
+      <div class="hero-img">
+        <img src="imagenes-catalogo-branded/mesa-arrime-natural-cesta.jpg" alt="Mesa de Arrime Atelier — natural con cesta" />
+        <div class="hero-badge">Edicion limitada</div>
+      </div>
+      <div class="hero-info">
+        <p class="p-tag">Mesa de arrime &middot; Atelier</p>
+        <h3>Mesa de Arrime<br>Atelier</h3>
+        <p class="dims">110 &times; 31 &times; 77 (h) cm</p>
+        <div class="gold-bar"></div>
+        <p class="hero-desc">
+          Pieza unica creada en nuestro taller, donde cada detalle cuenta una historia.
+          Madera restaurada con cajones y balda inferior — ese toque autentico, calido
+          y verdaderamente singular que estas buscando para tu espacio.
+        </p>
+        <div class="specs">
+          <div class="spec"><div class="spec-lbl">Ancho</div><div class="spec-val">110 cm</div></div>
+          <div class="spec"><div class="spec-lbl">Profundidad</div><div class="spec-val">31 cm</div></div>
+          <div class="spec"><div class="spec-lbl">Alto</div><div class="spec-val">77 cm</div></div>
+          <div class="spec"><div class="spec-lbl">Material</div><div class="spec-val">Madera restaurada</div></div>
+        </div>
+        <div class="price-box">
+          <div class="price-lbl">Precio de lanzamiento &mdash; Envio incluido</div>
+          <div class="price-num">$160.000</div>
+          <div class="price-sub">Precio final &middot; Sin costo adicional de envio en GBA</div>
+          <div class="ref-price">Precio de referencia en el mercado: $550.000</div>
+          <div class="savings">Ahorras mas de $390.000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tira de fotos detalle -->
+  <div class="thumb-strip">
+    <div class="thumb">
+      <img src="imagenes-catalogo-branded/mesa-arrime-frente-cajones.jpg" alt="Mesa arrime — cajones multicolor" />
+    </div>
+    <div class="thumb">
+      <img src="imagenes-catalogo-branded/mesa-arrime-verde-baldas.jpg" alt="Mesa arrime — cajones verdes y baldas" />
+    </div>
+    <div class="thumb">
+      <img src="imagenes-catalogo-branded/mesa-arrime-rustica-cajones.jpg" alt="Mesa arrime — version rustica" />
+    </div>
+    <div class="thumb">
+      <img src="imagenes-catalogo-branded/mesa-arrime-natural-puertas.jpg" alt="Mesa arrime — puertas naturales" />
+    </div>
+    <div class="thumb">
+      <img src="imagenes-catalogo-branded/mesa-arrime-natural-cesta.jpg" alt="Mesa arrime — natural con cesta" />
+    </div>
+  </div>
+
+  <!-- Cards detalle -->
+  <div class="grid">
+    <div class="card">
+      <div class="card-img h260">
+        <img src="imagenes-catalogo-branded/mesa-arrime-frente-cajones.jpg" alt="Mesa arrime cajones multicolor" />
+      </div>
+      <div class="card-body">
+        <div class="c-tag">Atelier &middot; Multicolor</div>
+        <h4>Mesa Arrime — Cajones Multicolor</h4>
+        <p class="c-desc">Cajones en naranja, amarillo y azul sobre estructura natural. Balda inferior de listones.</p>
+        <p class="c-note">Pieza unica &middot; Hecha a mano</p>
+        <a href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Me%20interesa%20la%20Mesa%20de%20Arrime%20Atelier" class="c-cta" target="_blank">Consultar</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img h260">
+        <img src="imagenes-catalogo-branded/mesa-arrime-verde-baldas.jpg" alt="Mesa arrime cajones verdes" />
+      </div>
+      <div class="card-body">
+        <div class="c-tag">Atelier &middot; Verde</div>
+        <h4>Mesa Arrime — Cajones Verde</h4>
+        <p class="c-desc">Cajones en verde turquesa con tiradores de bronce. Tres baldas abiertas. Estilo rustico campo.</p>
+        <p class="c-note">Pieza unica &middot; Hecha a mano</p>
+        <a href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Me%20interesa%20la%20Mesa%20de%20Arrime%20Atelier" class="c-cta" target="_blank">Consultar</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img h260">
+        <img src="imagenes-catalogo-branded/mesa-arrime-rustica-cajones.jpg" alt="Mesa arrime rustica cajones" />
+      </div>
+      <div class="card-body">
+        <div class="c-tag">Atelier &middot; Rustica</div>
+        <h4>Mesa Arrime — Version Rustica</h4>
+        <p class="c-desc">Cuatro cajones con baldas medias escalonadas. Madera en tonos calidos. Muy funcional.</p>
+        <p class="c-note">Pieza unica &middot; Hecha a mano</p>
+        <a href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Me%20interesa%20la%20Mesa%20de%20Arrime%20Atelier" class="c-cta" target="_blank">Consultar</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img h260">
+        <img src="imagenes-catalogo-branded/mesa-arrime-natural-puertas.jpg" alt="Mesa arrime natural con puerta" />
+      </div>
+      <div class="card-body">
+        <div class="c-tag">Atelier &middot; Natural</div>
+        <h4>Mesa Arrime — Puerta y Cajones</h4>
+        <p class="c-desc">Cajones superiores y puerta con panel decape blanco. Baldas laterales abiertas. Muy versatil.</p>
+        <p class="c-note">Pieza unica &middot; Hecha a mano</p>
+        <a href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Me%20interesa%20la%20Mesa%20de%20Arrime%20Atelier" class="c-cta" target="_blank">Consultar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ RACK TV ══ -->
+<section id="tv" style="background:var(--cream); padding-bottom:80px;">
+  <div class="s-wrap">
+    <div class="s-label">
+      <div class="tag">Sala de estar</div>
+      <h2>Rack TV Atelier</h2>
+      <p>Turquesa y fucsia restaurado. En living real. Pieza irrepetible.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-img h300">
+        <img src="imagenes-catalogo-branded/rack-tv-turquesa-fucsia-01.jpg" alt="Rack TV turquesa y fucsia — frente" />
+      </div>
+      <div class="card-body">
+        <div class="c-tag">Atelier &middot; Multicolor</div>
+        <h4>Rack TV Turquesa + Fucsia</h4>
+        <p class="c-desc">Madera restaurada en turquesa y fucsia. Hueco central, cajones y puertas. En living real.</p>
+        <p class="c-note">Pieza unica &middot; Hecha a mano</p>
+        <a href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Me%20interesa%20el%20Rack%20TV%20Rustico" class="c-cta" target="_blank">Consultar</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img h300">
+        <img src="imagenes-catalogo-branded/rack-tv-turquesa-fucsia-02.jpg" alt="Rack TV turquesa fucsia — angulo" />
+      </div>
+      <div class="card-body">
+        <div class="c-tag">Atelier &middot; Multicolor</div>
+        <h4>Rack TV — Vista Principal</h4>
+        <p class="c-desc">Tres hueco y dos puertas con panel fucsia. Cajones superiores. Luce en cualquier living.</p>
+        <p class="c-note">Pieza unica &middot; Hecha a mano</p>
+        <a href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Me%20interesa%20el%20Rack%20TV%20Rustico" class="c-cta" target="_blank">Consultar</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img h300">
+        <img src="imagenes-catalogo-branded/rack-tv-turquesa-fucsia-03.jpg" alt="Rack TV turquesa — decorado" />
+      </div>
+      <div class="card-body">
+        <div class="c-tag">Atelier &middot; En uso</div>
+        <h4>Rack TV — En Contexto Real</h4>
+        <p class="c-desc">El mismo mueble en vivo: decorado con marcos, plantas y canastos. Funcional y llamativo.</p>
+        <p class="c-note">Pieza unica &middot; Hecha a mano</p>
+        <a href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Me%20interesa%20el%20Rack%20TV%20Rustico" class="c-cta" target="_blank">Consultar</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img h300">
+        <img src="imagenes-catalogo-branded/rack-tv-turquesa-lateral.jpg" alt="Rack TV — vista lateral" />
+      </div>
+      <div class="card-body">
+        <div class="c-tag">Atelier &middot; Detalle</div>
+        <h4>Rack TV — Vista Lateral</h4>
+        <p class="c-desc">Lateral con madera decapada a mano. Cada pulgada de este mueble tiene historia.</p>
+        <p class="c-note">Pieza unica &middot; Hecha a mano</p>
+        <a href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Me%20interesa%20el%20Rack%20TV%20Rustico" class="c-cta" target="_blank">Consultar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DIFERENCIADORES ══ -->
+<section id="nosotros" class="features">
+  <h2>Por que elegirnos</h2>
+  <div class="f-grid">
+    <div class="f-item">
+      <div class="f-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <h4>Piezas unicas</h4>
+      <p>Cada mueble es irrepetible. No producimos en serie. Tu pieza no la va a tener nadie mas.</p>
+    </div>
+    <div class="f-item">
+      <div class="f-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h4>Madera restaurada</h4>
+      <p>Trabajamos con maderas con historia, recuperadas y transformadas con tiempo y cuidado.</p>
+    </div>
+    <div class="f-icon-wrap">
+    </div>
+    <div class="f-item">
+      <div class="f-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <h4>Envio incluido</h4>
+      <p>El precio que ves es el precio final. Sin costos ocultos de logistica en todo el GBA.</p>
+    </div>
+    <div class="f-item">
+      <div class="f-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+      </div>
+      <h4>Hecho a mano</h4>
+      <p>Cada detalle es artesanal. El tiempo y el cuidado que ponemos en cada pieza se nota al tacto.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ CTA ══ -->
+<section id="contacto" class="cta">
+  <div class="tag" style="margin-bottom:22px;">Hablemos</div>
+  <h2>Te interesa<br>alguna pieza?</h2>
+  <p>Stock limitado. Precios de lanzamiento. Envio sin costo en GBA. Respondemos el mismo dia.</p>
+  <a href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Vi%20el%20catalogo%20de%20Rustico%20y%20me%20interesa%20una%20pieza" class="btn-wa" target="_blank">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Escribir por WhatsApp
+  </a>
+  <p class="cta-note">Respondemos en menos de 2 horas &middot; Lunes a Sabado</p>
+</section>
+
+<footer>
+  <img src="imagenes/logo.png" class="f-logo" alt="Rustico" />
+  <p><strong>Rustico</strong> — Muebles Unicos de Madera Restaurada</p>
+  <p>Gran Buenos Aires, Argentina</p>
+  <p style="margin-top:8px;font-size:11px;">Cada pieza tiene una historia</p>
+</footer>
+
+</body>
+</html>

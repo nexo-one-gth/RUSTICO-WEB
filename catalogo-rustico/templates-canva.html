@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atelier — Templates Canva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ─────────────────────────────── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --cream:  #f5f0e8;
+      --warm:   #e8dcc8;
+      --brown:  #5c3d2e;
+      --dark:   #2c1810;
+      --gold:   #c8a96e;
+      --text:   #3a2a1e;
+      --light:  #faf7f2;
+      --sand:   #a89880;
+      --green:  #4d7d35;   /* verde botánico del logo (brote) */
+      --olive:  #6b7a35;   /* verde oliva — versión cálida/muted */
+    }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #1a1a1a;
+      color: var(--text);
+      padding: 40px 20px;
+    }
+
+    /* ── PAGE HEADER ──────────────────────────────── */
+    .page-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .page-header .eyebrow {
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--cream);
+    }
+    .page-header p {
+      font-size: 13px;
+      color: var(--sand);
+      margin-top: 8px;
+      letter-spacing: 1px;
+    }
+
+    /* ── SECTION ──────────────────────────────────── */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--gold);
+      border-bottom: 1px solid #333;
+      padding-bottom: 14px;
+      margin-bottom: 36px;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+    .section-title span {
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #555;
+      text-transform: uppercase;
+    }
+    .templates-row {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .template-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .template-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #555;
+    }
+    .specs {
+      font-size: 11px;
+      color: #444;
+      letter-spacing: 1px;
+    }
+
+    /* ────────────────────────────────────────────────
+       FEED POST 4:5  (1080 × 1350 px → 324 × 405 px)
+    ──────────────────────────────────────────────── */
+    .feed {
+      width: 324px;
+      height: 405px;
+      position: relative;
+      overflow: hidden;
+      background: var(--dark);
+      box-shadow: 0 32px 64px rgba(0,0,0,.6);
+    }
+
+    /* Variante A: Imagen + overlay degradado + copy abajo */
+    .feed-a .bg-img {
+      position: absolute;
+      inset: 0;
+      background: url('imagenes-catalogo/aparador-multicolor-salon.jpg') center/cover no-repeat;
+    }
+    .feed-a .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(44,24,16,0) 30%,
+        rgba(44,24,16,.88) 75%,
+        rgba(44,24,16,.97) 100%
+      );
+    }
+    .feed-a .content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 28px 26px 30px;
+    }
+    .feed-a .tag-pill {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 12px;
+    }
+    .feed-a .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .feed-a .product-name em { font-style: italic; color: var(--gold); }
+    .feed-a .dims {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--sand);
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+    }
+    .feed-a .divider { width: 36px; height: 1px; background: var(--gold); margin-bottom: 14px; }
+    .feed-a .price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .feed-a .price {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: var(--cream);
+    }
+    .feed-a .price-note {
+      font-size: 10px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .feed-a .logo-mark {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(200,169,110,.7);
+      letter-spacing: 1px;
+    }
+
+    /* Variante B: Fondo crema, imagen cuadrada arriba, copy abajo */
+    .feed-b {
+      background: var(--light);
+      display: flex;
+      flex-direction: column;
+    }
+    .feed-b .img-block {
+      height: 236px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .feed-b .img-block img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .feed-b .copy-block {
+      flex: 1;
+      padding: 20px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--light);
+    }
+    .feed-b .brand {
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .feed-b .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--dark);
+      line-height: 1.25;
+    }
+    .feed-b .title em { font-style: italic; }
+    .feed-b .sub {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--sand);
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+    .feed-b .bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--warm);
+      padding-top: 14px;
+      margin-top: 12px;
+    }
+    .feed-b .price-b {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--dark);
+    }
+    .feed-b .cta-chip {
+      background: var(--dark);
+      color: var(--gold);
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 7px 13px;
+    }
+
+    /* ────────────────────────────────────────────────
+       STORIES 9:16  (1080 × 1920 px → 202 × 360 px)
+    ──────────────────────────────────────────────── */
+    .story {
+      width: 202px;
+      height: 360px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 32px 64px rgba(0,0,0,.6);
+    }
+
+    /* Slide 1 — Gancho */
+    .story-1 {
+      background: var(--dark);
+    }
+    .story-1 .bg {
+      position: absolute;
+      inset: 0;
+      background: url('imagenes-catalogo/aparador-natural-living-flores.jpg') center/cover no-repeat;
+      opacity: .55;
+    }
+    .story-1 .content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px 18px 24px;
+    }
+    .story-1 .top-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 12px;
+      font-style: italic;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .story-1 .hook-text {
+      text-align: center;
+    }
+    .story-1 .hook-text .eyebrow {
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .story-1 .hook-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.25;
+    }
+    .story-1 .hook-text h2 em { font-style: italic; color: var(--gold); }
+    .story-1 .swipe {
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(245,240,232,.6);
+    }
+
+    /* Slide 2 — Producto */
+    .story-2 {
+      background: var(--cream);
+    }
+    .story-2 .top-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold);
+    }
+    .story-2 .img-area {
+      position: absolute;
+      top: 4px; left: 0; right: 0;
+      height: 195px;
+      overflow: hidden;
+    }
+    .story-2 .img-area img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .story-2 .copy-area {
+      position: absolute;
+      top: 204px; left: 0; right: 0; bottom: 0;
+      padding: 16px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--cream);
+    }
+    .story-2 .s2-brand {
+      font-size: 8px;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .story-2 .s2-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--dark);
+      line-height: 1.2;
+      margin: 5px 0 3px;
+    }
+    .story-2 .s2-title em { font-style: italic; }
+    .story-2 .s2-detail {
+      font-size: 10px;
+      font-weight: 300;
+      color: var(--sand);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .story-2 .s2-divider {
+      width: 28px; height: 1px;
+      background: var(--gold);
+      margin-bottom: 10px;
+    }
+    .story-2 .s2-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--dark);
+    }
+    .story-2 .s2-shipping {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Slide 3 — CTA */
+    .story-3 {
+      background: var(--dark);
+    }
+    .story-3 .content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 22px;
+      gap: 0;
+    }
+    .story-3 .s3-eyebrow {
+      font-size: 8px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .story-3 .s3-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream);
+      text-align: center;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+    .story-3 .s3-sub {
+      font-size: 10px;
+      font-weight: 300;
+      color: var(--sand);
+      text-align: center;
+      letter-spacing: 1px;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .story-3 .s3-btn {
+      background: var(--gold);
+      color: var(--dark);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 11px 22px;
+      margin-bottom: 22px;
+    }
+    .story-3 .s3-divider {
+      width: 36px; height: 1px;
+      background: rgba(200,169,110,.4);
+      margin-bottom: 16px;
+    }
+    .story-3 .s3-small {
+      font-size: 9px;
+      color: rgba(200,169,110,.55);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ────────────────────────────────────────────────
+       REEL COVER  (1080 × 1920 → 202 × 360)
+    ──────────────────────────────────────────────── */
+    .reel {
+      width: 202px;
+      height: 360px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 32px 64px rgba(0,0,0,.6);
+    }
+    .reel .bg {
+      position: absolute;
+      inset: 0;
+      background: url('imagenes-catalogo/mueble-tv-rustico-living.jpg') center/cover no-repeat;
+    }
+    .reel .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(44,24,16,.6) 0%,
+        rgba(44,24,16,.3) 50%,
+        rgba(44,24,16,.85) 100%
+      );
+    }
+    .reel .content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 22px 18px;
+    }
+    .reel .reel-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 44px;
+      height: 44px;
+      border: 1.5px solid rgba(200,169,110,.6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .reel .reel-icon::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 14px solid var(--gold);
+      margin-left: 4px;
+    }
+    .reel .reel-label {
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .reel .reel-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.25;
+    }
+    .reel .reel-title em { font-style: italic; color: var(--gold); }
+
+    /* ────────────────────────────────────────────────
+       HIGHLIGHT COVERS  (1080 × 1080 → 80 × 80)
+    ──────────────────────────────────────────────── */
+    .highlights-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+    .hl-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .hl-circle-outer {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--brown) 100%);
+      box-shadow: 0 8px 24px rgba(0,0,0,.5);
+    }
+    .hl-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .hl-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .hl-circle .hl-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: rgba(44,24,16,.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hl-circle .hl-icon {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--gold);
+    }
+    .hl-name {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #666;
+    }
+
+    /* Highlight sin imagen (icono texto) */
+    .hl-solid .hl-circle {
+      background: var(--dark);
+    }
+
+    /* ────────────────────────────────────────────────
+       PRECIO LISTA / CATÁLOGO  (landscape 1200 × 630)
+       → 540 × 283
+    ──────────────────────────────────────────────── */
+    .pricelist {
+      width: 540px;
+      background: var(--light);
+      border: 1px solid var(--warm);
+      box-shadow: 0 32px 64px rgba(0,0,0,.6);
+      overflow: hidden;
+    }
+    .pl-header {
+      background: var(--dark);
+      padding: 24px 32px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pl-header .pl-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+    }
+    .pl-header .pl-tag {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--sand);
+    }
+    .pl-body {
+      padding: 20px 32px 24px;
+    }
+    .pl-section-title {
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid var(--warm);
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+    .pl-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed #e0d8cc;
+      gap: 12px;
+    }
+    .pl-item:last-child { border-bottom: none; }
+    .pl-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--dark);
+    }
+    .pl-item-dims {
+      font-size: 10px;
+      font-weight: 300;
+      color: var(--sand);
+      margin-top: 2px;
+      letter-spacing: .5px;
+    }
+    .pl-item-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--brown);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .pl-footer {
+      background: var(--warm);
+      padding: 12px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .pl-footer .pl-note {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--brown);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .pl-footer .pl-cta {
+      font-size: 10px;
+      color: var(--dark);
+      letter-spacing: 1px;
+    }
+
+    /* ────────────────────────────────────────────────
+       SPECS CARD
+    ──────────────────────────────────────────────── */
+    .specs-card {
+      background: #111;
+      border: 1px solid #2a2a2a;
+      border-radius: 2px;
+      padding: 24px 28px;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.8;
+      max-width: 320px;
+    }
+    .specs-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 14px;
+      letter-spacing: .5px;
+    }
+    .specs-card table { width: 100%; border-collapse: collapse; }
+    .specs-card td { padding: 3px 0; vertical-align: top; }
+    .specs-card td:first-child { color: #555; width: 110px; font-size: 11px; }
+    .specs-card td:last-child { color: #aaa; font-size: 11px; }
+    .color-dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="eyebrow">Kit de Templates</div>
+    <h1>Atelier — <em>Canva Templates</em></h1>
+    <p>Referencia visual para armar en Canva · Todos los colores y tipografías son los del brand kit</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 1 — FEED POST (4:5)
+  ══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">
+      Feed Post — 4:5
+      <span>1080 × 1350 px</span>
+    </div>
+    <div class="templates-row">
+
+      <!-- Feed A: Dark overlay + copy bottom -->
+      <div class="template-wrap">
+        <div class="template-label">Variante A — Dark Hero</div>
+        <div class="feed feed-a">
+          <div class="bg-img"></div>
+          <div class="overlay"></div>
+          <div class="logo-mark">Atelier</div>
+          <div class="content">
+            <div class="tag-pill">Pieza Única</div>
+            <div class="product-name">Aparador<br><em>Multicolor</em></div>
+            <div class="dims">Madera Restaurada · Hecho a Mano</div>
+            <div class="divider"></div>
+            <div class="price-row">
+              <div class="price">$160.000</div>
+              <div class="price-note">Envío incluido GBA</div>
+            </div>
+          </div>
+        </div>
+        <div class="specs">Imagen full bleed · overlay oscuro · copy abajo</div>
+      </div>
+
+      <!-- Feed B: Cream split -->
+      <div class="template-wrap">
+        <div class="template-label">Variante B — Cream Split</div>
+        <div class="feed feed-b">
+          <div class="img-block">
+            <img src="imagenes-catalogo/mesa-arrime-atelier-blanca-living.jpg" alt="Mesa Atelier" />
+          </div>
+          <div class="copy-block">
+            <div>
+              <div class="brand">Atelier · Muebles Únicos</div>
+              <div class="title">Mesa de Arrime<br><em>Atelier</em></div>
+              <div class="sub">110 × 31 × 77 cm · Madera Restaurada</div>
+            </div>
+            <div class="bottom-row">
+              <div class="price-b">$160.000</div>
+              <div class="cta-chip">Ver Catálogo →</div>
+            </div>
+          </div>
+        </div>
+        <div class="specs">Imagen 58% · fondo crema · precio + CTA</div>
+      </div>
+
+      <!-- Specs card -->
+      <div class="template-wrap">
+        <div class="specs-card">
+          <h3>Specs del Template Feed</h3>
+          <table>
+            <tr><td>Tamaño</td><td>1080 × 1350 px (4:5)</td></tr>
+            <tr><td>Heading</td><td>Playfair Display · Italic · 60–80px</td></tr>
+            <tr><td>Body</td><td>Lato Light · 28–32px</td></tr>
+            <tr><td>Price</td><td>Playfair Display · 72px</td></tr>
+            <tr><td>Tags</td><td>Lato Bold · 24px · tracking 6</td></tr>
+            <tr><td>Fondo A</td><td><span class="color-dot" style="background:#2c1810"></span>#2c1810</td></tr>
+            <tr><td>Acento</td><td><span class="color-dot" style="background:#c8a96e"></span>#c8a96e</td></tr>
+            <tr><td>Fondo B</td><td><span class="color-dot" style="background:#faf7f2"></span>#faf7f2</td></tr>
+            <tr><td>Márgen</td><td>60px todos lados</td></tr>
+            <tr><td>Logo</td><td>Top-right · 120px ancho</td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 2 — STORIES (9:16) — 3 SLIDES
+  ══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">
+      Stories — Secuencia de 3
+      <span>1080 × 1920 px</span>
+    </div>
+    <div class="templates-row">
+
+      <!-- Slide 1 Gancho -->
+      <div class="template-wrap">
+        <div class="template-label">Slide 1 — Gancho</div>
+        <div class="story story-1">
+          <div class="bg"></div>
+          <div class="content">
+            <div class="top-brand">Atelier</div>
+            <div class="hook-text">
+              <div class="eyebrow">Nueva Pieza</div>
+              <h2>¿Buscás algo que<br>ninguno<br><em>tenga?</em></h2>
+            </div>
+            <div class="swipe">Ver más ↓</div>
+          </div>
+        </div>
+        <div class="specs">Imagen difuminada · copy central · gancho emocional</div>
+      </div>
+
+      <!-- Slide 2 Producto -->
+      <div class="template-wrap">
+        <div class="template-label">Slide 2 — Producto</div>
+        <div class="story story-2">
+          <div class="top-bar"></div>
+          <div class="img-area">
+            <img src="imagenes-catalogo/aparador-natural-living-flores.jpg" alt="" />
+          </div>
+          <div class="copy-area">
+            <div>
+              <div class="s2-brand">Atelier · Pieza Única</div>
+              <div class="s2-title">Mesa de Arrime<br><em>Atelier</em></div>
+              <div class="s2-detail">110 × 31 × 77 cm · Madera Restaurada · Hecha a Mano</div>
+              <div class="s2-divider"></div>
+            </div>
+            <div>
+              <div class="s2-price">$160.000</div>
+              <div class="s2-shipping">✓ Envío incluido en GBA</div>
+            </div>
+          </div>
+        </div>
+        <div class="specs">Foto 54% · crema abajo · precio bien visible</div>
+      </div>
+
+      <!-- Slide 3 CTA -->
+      <div class="template-wrap">
+        <div class="template-label">Slide 3 — CTA</div>
+        <div class="story story-3">
+          <div class="content">
+            <div class="s3-eyebrow">Stock limitado</div>
+            <div class="s3-title">¿La querés?</div>
+            <div class="s3-sub">Escribinos al DM o tocá el link para ver el catálogo completo</div>
+            <div class="s3-btn">Escribir al DM →</div>
+            <div class="s3-divider"></div>
+            <div class="s3-small">Link en bio</div>
+          </div>
+        </div>
+        <div class="specs">Fondo oscuro · CTA dorado · acción única</div>
+      </div>
+
+      <!-- Specs -->
+      <div class="template-wrap">
+        <div class="specs-card">
+          <h3>Specs Stories</h3>
+          <table>
+            <tr><td>Tamaño</td><td>1080 × 1920 px (9:16)</td></tr>
+            <tr><td>Safe zone</td><td>250px top y bottom</td></tr>
+            <tr><td>Slide 1</td><td>Imagen + overlay 45%<br>Texto centrado</td></tr>
+            <tr><td>Slide 2</td><td>Imagen top 54%<br>Fondo crema abajo</td></tr>
+            <tr><td>Slide 3</td><td>Fondo #2c1810<br>CTA en dorado</td></tr>
+            <tr><td>Heading</td><td>Playfair · 80–100px</td></tr>
+            <tr><td>Body</td><td>Lato Light · 32px</td></tr>
+            <tr><td>Btn</td><td>Fondo #c8a96e · Lato Bold 26px</td></tr>
+            <tr><td>Márgen lateral</td><td>80px</td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 3 — REEL COVER
+  ══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">
+      Reel Cover
+      <span>1080 × 1920 px</span>
+    </div>
+    <div class="templates-row">
+
+      <div class="template-wrap">
+        <div class="template-label">Cover — Oscuro con Play</div>
+        <div class="reel">
+          <div class="bg"></div>
+          <div class="overlay"></div>
+          <div class="reel-icon"></div>
+          <div class="content">
+            <div class="reel-label">Reel · Atelier</div>
+            <div class="reel-title">Cada marca<br>en la madera<br>tiene una <em>historia</em></div>
+          </div>
+        </div>
+        <div class="specs">Imagen oscurecida · ícono play · copy abajo izquierda</div>
+      </div>
+
+      <div class="template-wrap">
+        <div class="specs-card">
+          <h3>Specs Reel Cover</h3>
+          <table>
+            <tr><td>Tamaño</td><td>1080 × 1920 px</td></tr>
+            <tr><td>Foco visual</td><td>Centro — ícono play</td></tr>
+            <tr><td>Overlay</td><td>Gradiente 160° · oscuro</td></tr>
+            <tr><td>Título</td><td>Playfair · 96px · bottom-left</td></tr>
+            <tr><td>Label</td><td>Lato · 24px · tracking 6 · dorado</td></tr>
+            <tr><td>Play icon</td><td>Círculo borde dorado · 120px</td></tr>
+            <tr><td>Nota</td><td>Usar siempre la mejor foto del producto como fondo</td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 4 — HIGHLIGHT COVERS
+  ══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">
+      Highlight Covers
+      <span>1080 × 1080 px · círculo</span>
+    </div>
+    <div class="highlights-row">
+
+      <div class="hl-wrap">
+        <div class="hl-circle-outer">
+          <div class="hl-circle">
+            <img src="imagenes-catalogo/aparador-multicolor-salon.jpg" alt="" />
+            <div class="hl-overlay"><span class="hl-icon">A</span></div>
+          </div>
+        </div>
+        <div class="hl-name">Aparadores</div>
+      </div>
+
+      <div class="hl-wrap">
+        <div class="hl-circle-outer">
+          <div class="hl-circle">
+            <img src="imagenes-catalogo/mueble-tv-rustico-living.jpg" alt="" />
+            <div class="hl-overlay"><span class="hl-icon">TV</span></div>
+          </div>
+        </div>
+        <div class="hl-name">Muebles TV</div>
+      </div>
+
+      <div class="hl-wrap">
+        <div class="hl-circle-outer">
+          <div class="hl-circle">
+            <img src="imagenes-catalogo/mesa-ratona-living-flores.jpg" alt="" />
+            <div class="hl-overlay"><span class="hl-icon">M</span></div>
+          </div>
+        </div>
+        <div class="hl-name">Mesas</div>
+      </div>
+
+      <div class="hl-wrap">
+        <div class="hl-circle-outer">
+          <div class="hl-circle">
+            <img src="imagenes-catalogo/isla-cocina-azul-provenzal.jpg" alt="" />
+            <div class="hl-overlay"><span class="hl-icon">C</span></div>
+          </div>
+        </div>
+        <div class="hl-name">Cocina</div>
+      </div>
+
+      <div class="hl-wrap">
+        <div class="hl-circle-outer">
+          <div class="hl-circle">
+            <img src="imagenes-catalogo/vanitory-rustico-bacha-bol.jpg" alt="" />
+            <div class="hl-overlay"><span class="hl-icon">B</span></div>
+          </div>
+        </div>
+        <div class="hl-name">Baño</div>
+      </div>
+
+      <div class="hl-wrap">
+        <div class="hl-circle-outer">
+          <div class="hl-circle">
+            <img src="imagenes-catalogo/consola-rustica-exterior.jpg" alt="" />
+            <div class="hl-overlay"><span class="hl-icon">E</span></div>
+          </div>
+        </div>
+        <div class="hl-name">Exterior</div>
+      </div>
+
+      <div class="hl-wrap">
+        <div class="hl-circle-outer hl-solid">
+          <div class="hl-circle" style="background: var(--dark);">
+            <div class="hl-overlay" style="background:transparent;"><span class="hl-icon" style="font-size:13px;letter-spacing:1px;">★ NEW</span></div>
+          </div>
+        </div>
+        <div class="hl-name">Novedades</div>
+      </div>
+
+      <div class="hl-wrap">
+        <div class="hl-circle-outer">
+          <div class="hl-circle" style="background: var(--dark);">
+            <div class="hl-overlay" style="background:transparent; flex-direction:column; gap:4px;">
+              <span class="hl-icon" style="font-size:13px;">📐</span>
+              <span style="font-size:7px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">Info</span>
+            </div>
+          </div>
+        </div>
+        <div class="hl-name">Proceso</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 5 — LISTA DE PRECIOS / CATÁLOGO POST
+  ══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">
+      Lista de Precios — Landscape
+      <span>1200 × 630 px</span>
+    </div>
+    <div class="templates-row">
+
+      <div class="template-wrap">
+        <div class="template-label">Price List Post</div>
+        <div class="pricelist">
+          <div class="pl-header">
+            <div class="pl-brand">Atelier</div>
+            <div class="pl-tag">Precios de Lanzamiento · 2025</div>
+          </div>
+          <div class="pl-body">
+            <div class="pl-section-title">Piezas Disponibles</div>
+            <div class="pl-item">
+              <div>
+                <div class="pl-item-name">Mesa de Arrime Atelier</div>
+                <div class="pl-item-dims">110 × 31 × 77 cm · Madera restaurada</div>
+              </div>
+              <div class="pl-item-price">$160.000</div>
+            </div>
+            <div class="pl-item">
+              <div>
+                <div class="pl-item-name">Aparador Multicolor</div>
+                <div class="pl-item-dims">Medidas a consultar · Colores a elección</div>
+              </div>
+              <div class="pl-item-price">Consultar</div>
+            </div>
+            <div class="pl-item">
+              <div>
+                <div class="pl-item-name">Mueble TV Rústico</div>
+                <div class="pl-item-dims">Medidas a consultar · Varios terminados</div>
+              </div>
+              <div class="pl-item-price">Consultar</div>
+            </div>
+            <div class="pl-item">
+              <div>
+                <div class="pl-item-name">Mesa Ratona</div>
+                <div class="pl-item-dims">Varios tamaños · Madera natural</div>
+              </div>
+              <div class="pl-item-price">Consultar</div>
+            </div>
+          </div>
+          <div class="pl-footer">
+            <div class="pl-note">Envío incluido en GBA</div>
+            <div class="pl-cta">DM para reservar · Piezas únicas irrepetibles</div>
+          </div>
+        </div>
+        <div class="specs">Header oscuro · lista limpia · footer cálido</div>
+      </div>
+
+      <div class="template-wrap">
+        <div class="specs-card">
+          <h3>Specs Price List</h3>
+          <table>
+            <tr><td>Tamaño</td><td>1200 × 630 px</td></tr>
+            <tr><td>Header bg</td><td><span class="color-dot" style="background:#2c1810"></span>#2c1810</td></tr>
+            <tr><td>Body bg</td><td><span class="color-dot" style="background:#faf7f2"></span>#faf7f2</td></tr>
+            <tr><td>Footer bg</td><td><span class="color-dot" style="background:#e8dcc8"></span>#e8dcc8</td></tr>
+            <tr><td>Brand name</td><td>Playfair Italic · 56px · dorado</td></tr>
+            <tr><td>Product name</td><td>Playfair Regular · 36px</td></tr>
+            <tr><td>Dims</td><td>Lato Light · 26px · sand</td></tr>
+            <tr><td>Price</td><td>Playfair · 40px · brown</td></tr>
+            <tr><td>Section label</td><td>Lato · 22px · tracking 8 · dorado</td></tr>
+            <tr><td>Separadores</td><td>Dashed · #e0d8cc</td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 6b — USO DEL VERDE EN TEMPLATES
+  ══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">
+      Verde en Uso
+      <span>Ejemplos de aplicación del verde logo y oliva</span>
+    </div>
+    <div class="templates-row" style="align-items:flex-start; gap:28px; flex-wrap:wrap;">
+
+      <!-- Badge / Tag sobre fondo oscuro -->
+      <div class="template-wrap">
+        <div class="template-label">Tag · Badge · Etiqueta</div>
+        <div style="background:var(--dark); padding:32px 28px; display:flex; flex-direction:column; gap:14px; width:260px; box-shadow:0 16px 40px rgba(0,0,0,.5);">
+          <div style="display:inline-flex; align-items:center; gap:8px; border:1px solid #4d7d35; padding:5px 12px; width:fit-content;">
+            <span style="width:7px;height:7px;border-radius:50%;background:#4d7d35;flex-shrink:0;"></span>
+            <span style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#4d7d35;font-family:'Lato',sans-serif;font-weight:700;">Madera Natural</span>
+          </div>
+          <div style="display:inline-flex; align-items:center; gap:8px; background:#4d7d35; padding:6px 14px; width:fit-content;">
+            <span style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#faf7f2;font-family:'Lato',sans-serif;font-weight:700;">Hecho a Mano</span>
+          </div>
+          <div style="display:inline-flex; align-items:center; gap:8px; border:1px solid #6b7a35; padding:5px 12px; width:fit-content;">
+            <span style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#6b7a35;font-family:'Lato',sans-serif;font-weight:700;">Verde Oliva</span>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:11px; color:#a89880; margin-top:4px; font-style:italic;">
+            Usar para resaltar materiales naturales, sustentabilidad, proceso artesanal.
+          </div>
+        </div>
+      </div>
+
+      <!-- Highlight cover verde -->
+      <div class="template-wrap">
+        <div class="template-label">Highlight — Verde</div>
+        <div style="display:flex; gap:16px; align-items:flex-end;">
+          <!-- verde logo -->
+          <div class="hl-wrap">
+            <div style="width:80px;height:80px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#4d7d35 0%,#2c4a1e 100%);box-shadow:0 8px 24px rgba(0,0,0,.5);">
+              <div style="width:100%;height:100%;border-radius:50%;background:#4d7d35;display:flex;align-items:center;justify-content:center;">
+                <span style="font-family:'Playfair Display',serif;font-size:22px;color:#f5f0e8;">🌿</span>
+              </div>
+            </div>
+            <div class="hl-name">Proceso</div>
+          </div>
+          <!-- oliva -->
+          <div class="hl-wrap">
+            <div style="width:80px;height:80px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#6b7a35 0%,#4a5520 100%);box-shadow:0 8px 24px rgba(0,0,0,.5);">
+              <div style="width:100%;height:100%;border-radius:50%;background:#6b7a35;display:flex;align-items:center;justify-content:center;">
+                <span style="font-family:'Playfair Display',serif;font-size:22px;color:#f5f0e8;">🪵</span>
+              </div>
+            </div>
+            <div class="hl-name">Taller</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini feed card con acento verde -->
+      <div class="template-wrap">
+        <div class="template-label">Feed — Acento Verde</div>
+        <div style="width:220px; background:var(--light); box-shadow:0 16px 40px rgba(0,0,0,.5); overflow:hidden;">
+          <div style="height:140px; overflow:hidden;">
+            <img src="imagenes-catalogo/aparador-verde-cajones.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+          </div>
+          <div style="padding:16px 18px 18px;">
+            <div style="display:flex;gap:6px;margin-bottom:10px;">
+              <span style="font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:#4d7d35;border:1px solid #4d7d35;padding:3px 8px;font-family:'Lato',sans-serif;font-weight:700;">Natural</span>
+              <span style="font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:3px 8px;font-family:'Lato',sans-serif;font-weight:700;">Única</span>
+            </div>
+            <div style="font-family:'Playfair Display',serif;font-size:16px;color:var(--dark);margin-bottom:4px;">Aparador <em>Verde</em></div>
+            <div style="font-size:10px;font-weight:300;color:var(--sand);margin-bottom:12px;letter-spacing:.5px;">Madera restaurada · Hecho a mano</div>
+            <div style="border-top:1px solid var(--warm);padding-top:10px;display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-family:'Playfair Display',serif;font-size:16px;color:var(--dark);">Consultar</span>
+              <span style="background:#4d7d35;color:#faf7f2;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;font-weight:700;">DM →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Specs del verde -->
+      <div class="template-wrap">
+        <div class="specs-card">
+          <h3>Verde — Cuándo Usarlo</h3>
+          <table>
+            <tr><td>Verde Logo</td><td><span class="color-dot" style="background:#4d7d35"></span>#4d7d35</td></tr>
+            <tr><td>Verde Oliva</td><td><span class="color-dot" style="background:#6b7a35"></span>#6b7a35</td></tr>
+            <tr><td>&nbsp;</td><td></td></tr>
+            <tr><td>Uso ✓</td><td>Tags "Natural / Eco / Mano"<br>CTA secundario<br>Highlights Taller / Proceso<br>Acento en cards de madera natural<br>Badge "Disponible"</td></tr>
+            <tr><td>Uso ✗</td><td>NO reemplaza al dorado como color principal<br>NO en fondos grandes<br>NO en texto corrido</td></tr>
+            <tr><td>Combina con</td><td>#c8a96e · #faf7f2 · #2c1810</td></tr>
+            <tr><td>No combina</td><td>#e8dcc8 (muy similar en valor)</td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 6 — PALETA Y TIPOGRAFÍA (ref rápida)
+  ══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">
+      Referencia Rápida
+      <span>Colores · Tipografía · Voz</span>
+    </div>
+    <div class="templates-row" style="align-items:flex-start; gap:24px;">
+
+      <!-- Paleta -->
+      <div class="specs-card" style="max-width:280px;">
+        <h3>Paleta de Colores</h3>
+        <table>
+          <tr><td><span class="color-dot" style="background:#2c1810"></span>Oscuro</td><td>#2c1810</td></tr>
+          <tr><td><span class="color-dot" style="background:#5c3d2e"></span>Marrón</td><td>#5c3d2e</td></tr>
+          <tr><td><span class="color-dot" style="background:#c8a96e"></span>Dorado ⭐</td><td>#c8a96e</td></tr>
+          <tr><td><span class="color-dot" style="background:#4d7d35"></span>Verde Logo ⭐</td><td>#4d7d35</td></tr>
+          <tr><td><span class="color-dot" style="background:#6b7a35"></span>Verde Oliva</td><td>#6b7a35</td></tr>
+          <tr><td><span class="color-dot" style="background:#f5f0e8"></span>Crema</td><td>#f5f0e8</td></tr>
+          <tr><td><span class="color-dot" style="background:#e8dcc8"></span>Beige</td><td>#e8dcc8</td></tr>
+          <tr><td><span class="color-dot" style="background:#faf7f2; border:1px solid #ccc"></span>Blanco roto</td><td>#faf7f2</td></tr>
+          <tr><td><span class="color-dot" style="background:#3a2a1e"></span>Texto</td><td>#3a2a1e</td></tr>
+          <tr><td><span class="color-dot" style="background:#a89880"></span>Muted</td><td>#a89880</td></tr>
+        </table>
+      </div>
+
+      <!-- Tipografía -->
+      <div class="specs-card" style="max-width:280px;">
+        <h3>Tipografía</h3>
+        <table>
+          <tr><td>Heading</td><td>Playfair Display<br>Regular / Italic / Bold</td></tr>
+          <tr><td>Body</td><td>Lato<br>Light 300 / 400 / Bold 700</td></tr>
+          <tr><td>Jerarquía H1</td><td>Playfair Italic · 80–120px</td></tr>
+          <tr><td>Jerarquía H2</td><td>Playfair Regular · 48–72px</td></tr>
+          <tr><td>Párrafo</td><td>Lato Light · 28–36px</td></tr>
+          <tr><td>Tags / Labels</td><td>Lato Bold · 20–26px<br>tracking 4–6px · mayúsculas</td></tr>
+          <tr><td>Precio</td><td>Playfair Regular · 64–96px</td></tr>
+        </table>
+      </div>
+
+      <!-- Voz -->
+      <div class="specs-card" style="max-width:280px;">
+        <h3>Voz de Marca</h3>
+        <table>
+          <tr><td>Estilo</td><td>Cálido · artesanal · premium</td></tr>
+          <tr><td>Tono</td><td>Directo · exclusivo · sin grandilocuencia</td></tr>
+          <tr><td>Keywords</td><td>único · irrepetible · restaurada · mano · atelier · rústico</td></tr>
+          <tr><td>Evitar</td><td>"económico" · "barato" · "oferta"</td></tr>
+          <tr><td>CTA típico</td><td>"Escribinos al DM"<br>"Ver el catálogo"<br>"Reservar"</td></tr>
+          <tr><td>Precio</td><td>Siempre "precio de lanzamiento" o "precio final"</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
