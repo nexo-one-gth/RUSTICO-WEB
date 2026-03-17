@@ -1,0 +1,7 @@
+runConfig:
+  runtime: nodejs20
+
+outputFiles:
+  serverApp:
+    include:
+      - "**"
