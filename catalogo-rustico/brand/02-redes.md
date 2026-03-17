@@ -10,7 +10,7 @@
 
 | Campo | Valor |
 |---|---|
-| Username sugerido | `@rustico.muebles` o `@rustico.atelier` |
+| Username | `@rustic0muebles` → https://www.instagram.com/rustic0muebles/ |
 | Nombre en perfil | Rústico · Muebles Únicos |
 | Bio | Muebles de madera restaurada, hechos a mano en GBA 🌿 Cada pieza es irrepetible → Link al catálogo |
 | Link en bio | URL de la landing page (catálogo + formulario de contacto) |
@@ -103,6 +103,7 @@
 
 | Campo | Valor |
 |---|---|
+| URL | https://www.facebook.com/profile.php?id=61575750940128 |
 | Nombre | Rústico Muebles |
 | Categoría | Tienda de muebles del hogar |
 | Descripción | Fábrica de muebles únicos en madera reciclada. Estilo rústico-campo. GBA y CABA. Precio de fábrica directo. |

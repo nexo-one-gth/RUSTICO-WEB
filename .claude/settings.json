@@ -9,7 +9,10 @@
       "Bash(/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command \"Set-Location ''C:\\\\Users\\\\nigonzalezc\\\\Desktop\\\\ASESOR25\\\\Ligthouse\\\\nexo\\\\RUSTICO\\\\rustico-web''; & ''C:\\\\Program Files\\\\nodejs\\\\node.exe'' node_modules\\\\.bin\\\\next dev\")",
       "Bash(/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -File:*)",
       "Bash(\"C:/Program Files/nodejs/node.exe\" \"C:/Users/nigonzalezc/Desktop/ASESOR25/Ligthouse/nexo/RUSTICO/rustico-web/node_modules/next/dist/bin/next\" dev --cwd \"C:/Users/nigonzalezc/Desktop/ASESOR25/Ligthouse/nexo/RUSTICO/rustico-web\")",
-      "Bash(\"C:/Program Files/nodejs/node.exe\" node_modules/next/dist/bin/next dev)"
+      "Bash(\"C:/Program Files/nodejs/node.exe\" node_modules/next/dist/bin/next dev)",
+      "Bash(firebase login:add --no-localhost)",
+      "Bash(firebase projects:list --account ngonzalezcuiuli@gmail.com)",
+      "Bash(firebase apphosting:backends:list --project rustic0)"
     ]
   }
 }

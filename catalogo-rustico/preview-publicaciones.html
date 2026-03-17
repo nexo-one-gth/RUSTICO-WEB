@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rústico — Preview Publicaciones Redes</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --oscuro:  #2c1810;
+    --dorado:  #c8a96e;
+    --verde:   #4d7d35;
+    --marron:  #5c3d2e;
+    --crema:   #f5f0e8;
+    --beige:   #e8dcc8;
+    --blanco:  #faf7f2;
+    --muted:   #a89880;
+    --cuerpo:  #3a2a1e;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body:    'Plus Jakarta Sans', sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--blanco);
+    font-family: var(--font-body);
+    color: var(--cuerpo);
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--oscuro);
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--dorado);
+  }
+  header img { height: 52px; filter: brightness(1.8) saturate(0.3) sepia(0.4); }
+  .header-title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 4px;
+    color: var(--dorado);
+    text-align: right;
+    line-height: 1.4;
+  }
+  .header-title span { display: block; color: var(--muted); font-family: var(--font-body); font-size: 11px; letter-spacing: 2px; font-weight: 400; margin-top: 2px; }
+
+  /* ── NAV PILLS ── */
+  .nav-wrap {
+    background: var(--oscuro);
+    padding: 0 40px 20px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    background: transparent;
+    border: 1px solid var(--marron);
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .pill:hover, .pill.active {
+    background: var(--dorado);
+    border-color: var(--dorado);
+    color: var(--oscuro);
+  }
+
+  /* ── MAIN LAYOUT ── */
+  main { max-width: 1280px; margin: 0 auto; padding: 48px 40px; }
+
+  .post-section { display: none; }
+  .post-section.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--beige);
+  }
+  .section-eyebrow {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 42px;
+    letter-spacing: 2px;
+    color: var(--oscuro);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── PREVIEW GRID ── */
+  .preview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* ── PHONE MOCKUP ── */
+  .phone-col { position: relative; }
+  .view-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 16px;
+  }
+  .view-tab {
+    background: var(--beige);
+    border: none;
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .view-tab:first-child { border-right: 1px solid #d0c8b8; }
+  .view-tab.active { background: var(--oscuro); color: var(--dorado); }
+
+  /* FEED POST (4:5) */
+  .feed-mockup {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+  .feed-mockup img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .feed-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(44,24,16,0.92) 0%, rgba(44,24,16,0.4) 55%, rgba(44,24,16,0.05) 100%);
+  }
+  .feed-brand-tag {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    border: 1px solid rgba(200,169,110,0.7);
+    padding: 4px 10px;
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: rgba(200,169,110,0.9);
+    text-transform: uppercase;
+  }
+  .feed-logo-tag {
+    position: absolute;
+    top: 16px;
+    left: 18px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: rgba(200,169,110,0.8);
+  }
+  .feed-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px 22px 22px;
+  }
+  .feed-tag {
+    display: inline-block;
+    border: 1px solid var(--dorado);
+    color: var(--dorado);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    margin-bottom: 10px;
+  }
+  .feed-nombre {
+    font-family: var(--font-display);
+    font-size: 36px;
+    letter-spacing: 1px;
+    color: var(--crema);
+    line-height: 1.05;
+    margin-bottom: 10px;
+  }
+  .feed-specs {
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(245,240,232,0.75);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .feed-price {
+    font-family: var(--font-display);
+    font-size: 48px;
+    color: var(--dorado);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .feed-envio {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dorado);
+  }
+
+  /* STORY (9:16) */
+  .story-wrap { display: none; }
+  .story-wrap.active { display: block; }
+  .feed-wrap { display: block; }
+  .feed-wrap.hidden { display: none; }
+
+  .story-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .story-dot {
+    background: var(--beige);
+    border: none;
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+  .story-dot.active { background: var(--oscuro); color: var(--crema); }
+
+  .story-frame {
+    position: relative;
+    width: 100%;
+    max-width: 236px;
+    aspect-ratio: 9/16;
+    overflow: hidden;
+    background: var(--oscuro);
+  }
+  .story-frame img { width:100%; height:100%; object-fit:cover; }
+  .story-progress {
+    position: absolute;
+    top: 12px; left: 12px; right: 12px;
+    display: flex; gap: 3px;
+  }
+  .story-bar {
+    height: 2px;
+    background: rgba(245,240,232,0.35);
+    flex: 1;
+  }
+  .story-bar.done { background: var(--crema); }
+  .story-bar.current { background: var(--dorado); }
+
+  .story-overlay { position:absolute; inset:0; }
+
+  /* Story 1 */
+  .story-s1-overlay {
+    background: linear-gradient(160deg, rgba(44,24,16,0.75) 0%, rgba(44,24,16,0.3) 100%);
+  }
+  .story-s1-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    width: 85%;
+  }
+  .story-s1-text h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--crema);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .story-sticker {
+    display: inline-block;
+    background: var(--dorado);
+    color: var(--oscuro);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    margin-top: 8px;
+  }
+
+  /* Story 2 */
+  .story-s2-overlay {
+    background: linear-gradient(to top, rgba(44,24,16,0.96) 0%, rgba(44,24,16,0.2) 60%);
+  }
+  .story-s2-content {
+    position: absolute;
+    bottom: 24px; left: 16px; right: 16px;
+  }
+  .story-s2-content .s-tag {
+    font-size: 8px; font-weight:700; letter-spacing:3px;
+    text-transform: uppercase; color: var(--dorado);
+    border: 1px solid var(--dorado); padding: 3px 8px;
+    display: inline-block; margin-bottom: 8px;
+  }
+  .story-s2-content h3 {
+    font-family: var(--font-display);
+    font-size: 22px; letter-spacing:1px;
+    color: var(--crema); margin-bottom: 6px;
+    line-height: 1.1;
+  }
+  .story-s2-content .s-specs {
+    font-size: 9px; font-weight:300; color: rgba(245,240,232,.75);
+    line-height: 1.9; margin-bottom: 8px;
+  }
+  .story-s2-content .s-price {
+    font-family: var(--font-display);
+    font-size: 34px; color: var(--dorado); line-height:1;
+  }
+  .story-s2-content .s-envio {
+    font-size: 8px; font-weight:700; letter-spacing:2px;
+    color: var(--dorado); text-transform:uppercase;
+  }
+
+  /* Story 3 */
+  .story-s3-overlay {
+    background: rgba(44,24,16,0.88);
+  }
+  .story-s3-content {
+    position: absolute;
+    top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    width: 85%;
+  }
+  .story-s3-content h2 {
+    font-family: var(--font-display);
+    font-size: 30px; letter-spacing:2px;
+    color: var(--crema); margin-bottom:10px;
+    line-height:1.1;
+  }
+  .story-s3-content p {
+    font-size: 11px; font-weight:300;
+    color: rgba(245,240,232,0.75); line-height:1.7;
+    margin-bottom: 20px;
+  }
+  .story-cta-btn {
+    display: inline-block;
+    background: var(--verde);
+    color: var(--crema);
+    font-size: 10px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase;
+    padding: 10px 20px;
+  }
+
+  /* ── CAPTION COLUMN ── */
+  .caption-col { padding-left: 8px; }
+  .caption-tabs {
+    display: flex; gap: 0; margin-bottom: 24px;
+  }
+  .cap-tab {
+    background: var(--beige); border: none;
+    color: var(--muted); font-family: var(--font-body);
+    font-size: 10px; font-weight:700; letter-spacing:2px;
+    text-transform: uppercase; padding: 8px 18px;
+    cursor: pointer; transition: all .2s;
+  }
+  .cap-tab:first-child { border-right: 1px solid #d0c8b8; }
+  .cap-tab.active { background: var(--oscuro); color: var(--dorado); }
+
+  .caption-box { display:none; }
+  .caption-box.active { display:block; }
+
+  .caption-text {
+    background: white;
+    border: 1px solid var(--beige);
+    padding: 20px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.9;
+    color: var(--cuerpo);
+    white-space: pre-wrap;
+    margin-bottom: 16px;
+    font-family: var(--font-body);
+  }
+  .caption-label {
+    font-size: 10px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color: var(--dorado);
+    margin-bottom: 8px;
+  }
+  .hashtags {
+    background: var(--blanco);
+    border: 1px solid var(--beige);
+    padding: 14px 16px;
+    font-size: 11px;
+    color: #3b6fb5;
+    line-height: 2;
+    font-weight: 400;
+  }
+  .marketplace-box {
+    background: var(--blanco);
+    border: 1px solid var(--beige);
+    padding: 16px;
+    margin-top: 12px;
+  }
+  .marketplace-label {
+    font-size: 10px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color: var(--verde);
+    margin-bottom: 10px;
+  }
+  .marketplace-titulo {
+    font-family: var(--font-body);
+    font-size: 12px; font-weight:700;
+    color: var(--oscuro); margin-bottom: 10px;
+    line-height:1.4;
+    border-bottom: 1px solid var(--beige);
+    padding-bottom: 8px;
+  }
+  .marketplace-desc {
+    font-size: 12px; font-weight:300;
+    color: var(--cuerpo); line-height:1.8;
+    white-space: pre-wrap;
+  }
+
+  /* ── DIVIDER ── */
+  hr.brand { border:none; border-top: 1px solid var(--beige); margin: 60px 0; }
+
+  /* ── GRID OVERVIEW ── */
+  .grid-overview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    max-width: 540px;
+  }
+  .grid-thumb {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .grid-thumb img { width:100%; height:100%; object-fit:cover; transition: transform .3s; }
+  .grid-thumb:hover img { transform: scale(1.04); }
+  .grid-thumb-overlay {
+    position:absolute; inset:0;
+    background: rgba(44,24,16,0);
+    transition: background .3s;
+    display: flex; align-items:center; justify-content:center;
+  }
+  .grid-thumb:hover .grid-thumb-overlay {
+    background: rgba(44,24,16,0.55);
+  }
+  .grid-thumb-label {
+    font-family: var(--font-display);
+    font-size: 14px; letter-spacing:1px;
+    color: var(--crema); text-align:center;
+    opacity:0; transition: opacity .3s;
+    padding: 8px;
+    line-height: 1.2;
+  }
+  .grid-thumb:hover .grid-thumb-label { opacity:1; }
+
+  /* ── OVERVIEW PAGE ── */
+  .overview-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .overview-text {}
+  .calendar-table { width:100%; border-collapse:collapse; margin-top: 24px; }
+  .calendar-table th {
+    background: var(--oscuro); color: var(--dorado);
+    font-family: var(--font-body); font-size: 10px;
+    font-weight: 700; letter-spacing: 3px; text-transform:uppercase;
+    padding: 10px 14px; text-align:left;
+  }
+  .calendar-table td {
+    padding: 10px 14px; font-size: 12px; color: var(--cuerpo);
+    border-bottom: 1px solid var(--beige); vertical-align:top;
+  }
+  .calendar-table tr:hover td { background: var(--blanco); }
+  .cal-day { font-weight:700; color: var(--oscuro); }
+  .cal-num {
+    display: inline-block;
+    background: var(--dorado); color: var(--oscuro);
+    font-family: var(--font-display); font-size:13px;
+    width:22px; height:22px; line-height:22px;
+    text-align:center; margin-right:6px;
+  }
+  .badge {
+    display:inline-block;
+    border: 1px solid currentColor;
+    font-size: 8px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; padding: 2px 7px;
+    margin-left: 4px;
+  }
+  .badge-feed { color: var(--marron); }
+  .badge-story { color: var(--verde); }
+  .badge-carrusel { color: #3b6fb5; }
+
+  /* ── BRAND SPECS ── */
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .spec-card {
+    background: white;
+    border: 1px solid var(--beige);
+    padding: 16px;
+  }
+  .spec-card-label {
+    font-size: 9px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .color-swatch {
+    display:flex; align-items:center; gap:10px;
+    margin-bottom: 8px;
+  }
+  .swatch { width:28px; height:28px; flex-shrink:0; }
+  .swatch-info { font-size: 11px; line-height:1.5; }
+  .swatch-name { font-weight:700; color: var(--oscuro); }
+  .swatch-hex { color: var(--muted); font-size: 10px; }
+
+  /* ── DOWNLOAD BAR ── */
+  .download-bar {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--oscuro);
+    border: 1px solid var(--dorado);
+    color: var(--dorado);
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 9px 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .download-btn:hover {
+    background: var(--dorado);
+    color: var(--oscuro);
+  }
+  .download-btn svg { flex-shrink: 0; }
+  .download-btn.green {
+    border-color: var(--verde);
+    color: var(--verde);
+  }
+  .download-btn.green:hover {
+    background: var(--verde);
+    color: var(--crema);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .preview-grid { grid-template-columns: 1fr; }
+    .overview-intro { grid-template-columns: 1fr; }
+    main { padding: 32px 20px; }
+    header { padding: 20px; }
+    .nav-wrap { padding: 0 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <img src="imagenes/LOGO1.png" alt="Rústico">
+  <div class="header-title">
+    PREVIEW PUBLICACIONES
+    <span>Instagram · Facebook · Stories</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <button class="pill active" onclick="showSection('overview')">Vista General</button>
+  <button class="pill" onclick="showSection('p1')">01 · Consola Natural</button>
+  <button class="pill" onclick="showSection('p2')">02 · Aparador Multicolor</button>
+  <button class="pill" onclick="showSection('p3')">03 · Verde Menta</button>
+  <button class="pill" onclick="showSection('p4')">04 · Natural Puertas</button>
+  <button class="pill" onclick="showSection('p5')">05 · 4 Cajones Oscuro</button>
+  <button class="pill" onclick="showSection('p6')">06 · Rack TV</button>
+  <button class="pill" onclick="showSection('p7')">07 · #HechoAMano</button>
+  <button class="pill" onclick="showSection('p8')">08 · Mesa Ratona</button>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- OVERVIEW -->
+<!-- ══════════════════════════════════════════════ -->
+<section id="overview" class="post-section active">
+  <div class="section-header">
+    <div class="section-eyebrow">Rústico · Muebles Únicos</div>
+    <div class="section-title">8 PUBLICACIONES LISTAS</div>
+    <div class="section-sub">Instagram feed · Stories · Facebook Marketplace · Calendario semanal</div>
+  </div>
+
+  <div class="overview-intro">
+    <div>
+      <div class="section-eyebrow" style="margin-bottom:16px">Grid de Instagram</div>
+      <div class="grid-overview">
+        <div class="grid-thumb" onclick="showSection('p1')">
+          <img src="imagenes-catalogo-branded/mesa-arrime-natural-cesta.jpg" alt="">
+          <div class="grid-thumb-overlay"><div class="grid-thumb-label">Consola Natural</div></div>
+        </div>
+        <div class="grid-thumb" onclick="showSection('p2')">
+          <img src="imagenes-catalogo-branded/mesa-arrime-frente-cajones.jpg" alt="">
+          <div class="grid-thumb-overlay"><div class="grid-thumb-label">Aparador Multicolor</div></div>
+        </div>
+        <div class="grid-thumb" onclick="showSection('p3')">
+          <img src="imagenes-catalogo-branded/mesa-arrime-verde-baldas.jpg" alt="">
+          <div class="grid-thumb-overlay"><div class="grid-thumb-label">Verde Menta</div></div>
+        </div>
+        <div class="grid-thumb" onclick="showSection('p4')">
+          <img src="imagenes-catalogo-branded/mesa-arrime-natural-puertas.jpg" alt="">
+          <div class="grid-thumb-overlay"><div class="grid-thumb-label">Natural Puertas</div></div>
+        </div>
+        <div class="grid-thumb" onclick="showSection('p5')">
+          <img src="imagenes-catalogo-branded/mesa-arrime-rustica-cajones.jpg" alt="">
+          <div class="grid-thumb-overlay"><div class="grid-thumb-label">4 Cajones Oscuro</div></div>
+        </div>
+        <div class="grid-thumb" onclick="showSection('p6')">
+          <img src="imagenes-catalogo-branded/rack-tv-turquesa-fucsia-01.jpg" alt="">
+          <div class="grid-thumb-overlay"><div class="grid-thumb-label">Rack TV Turquesa</div></div>
+        </div>
+        <div class="grid-thumb" onclick="showSection('p7')">
+          <img src="imagenes-catalogo-branded/referencia-varios-01.jpg" alt="">
+          <div class="grid-thumb-overlay"><div class="grid-thumb-label">#HechoAMano</div></div>
+        </div>
+        <div class="grid-thumb" onclick="showSection('p8')">
+          <img src="imagenes-catalogo-branded/referencia-varios-02.jpg" alt="">
+          <div class="grid-thumb-overlay"><div class="grid-thumb-label">Mesa Ratona</div></div>
+        </div>
+        <div class="grid-thumb" style="background: var(--oscuro); display:flex; align-items:center; justify-content:center;">
+          <div style="text-align:center; padding:16px;">
+            <div style="font-family:var(--font-display); font-size:28px; color:var(--dorado); line-height:1;">+</div>
+            <div style="font-size:9px; color:var(--muted); letter-spacing:2px; font-weight:700; text-transform:uppercase; margin-top:4px;">Más</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-eyebrow" style="margin-bottom:16px">Calendario Semanal</div>
+      <table class="calendar-table">
+        <thead>
+          <tr><th>Día</th><th>Post</th><th>Formato</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="cal-day">Lunes</span></td>
+            <td><span class="cal-num">2</span>Aparador Multicolor</td>
+            <td><span class="badge badge-feed">Feed</span><span class="badge badge-story">Stories</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-day">Martes</span></td>
+            <td><span class="cal-num">6</span>Rack TV Turquesa</td>
+            <td><span class="badge badge-carrusel">Carrusel</span><span class="badge badge-story">Stories</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-day">Miércoles</span></td>
+            <td><span class="cal-num">7</span>#HechoAMano</td>
+            <td><span class="badge badge-feed">Feed</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-day">Jueves</span></td>
+            <td><span class="cal-num">1</span>Consola Natural</td>
+            <td><span class="badge badge-feed">Feed</span><span class="badge badge-story">Stories</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-day">Viernes</span></td>
+            <td><span class="cal-num">3</span>Verde Menta</td>
+            <td><span class="badge badge-feed">Feed</span><span class="badge badge-story">Stories</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-day">Sábado</span></td>
+            <td><span class="cal-num">8</span>Mesa Ratona</td>
+            <td><span class="badge badge-feed">Feed</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-day">Domingo</span></td>
+            <td><span class="cal-num">5</span>4 Cajones Oscuro</td>
+            <td><span class="badge badge-feed">Feed</span><span class="badge badge-story">Stories</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:32px;">
+        <div class="section-eyebrow" style="margin-bottom:16px">Identidad visual (Canva)</div>
+        <div class="specs-grid">
+          <div class="spec-card">
+            <div class="spec-card-label">Paleta de colores</div>
+            <div class="color-swatch"><div class="swatch" style="background:#2c1810;"></div><div class="swatch-info"><div class="swatch-name">Oscuro Tierra</div><div class="swatch-hex">#2c1810</div></div></div>
+            <div class="color-swatch"><div class="swatch" style="background:#c8a96e;"></div><div class="swatch-info"><div class="swatch-name">Dorado Atelier</div><div class="swatch-hex">#c8a96e</div></div></div>
+            <div class="color-swatch"><div class="swatch" style="background:#4d7d35;"></div><div class="swatch-info"><div class="swatch-name">Verde Logo</div><div class="swatch-hex">#4d7d35</div></div></div>
+            <div class="color-swatch"><div class="swatch" style="background:#f5f0e8; border:1px solid #e8dcc8;"></div><div class="swatch-info"><div class="swatch-name">Crema Cálida</div><div class="swatch-hex">#f5f0e8</div></div></div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-card-label">Tipografía</div>
+            <div style="margin-bottom:10px;">
+              <div style="font-family:'Bebas Neue'; font-size:28px; letter-spacing:2px; color:var(--oscuro); line-height:1;">Bebas Neue</div>
+              <div style="font-size:10px; color:var(--muted); letter-spacing:1px; margin-top:2px;">Títulos · Precios · CTAs</div>
+            </div>
+            <div>
+              <div style="font-family:'Plus Jakarta Sans'; font-size:14px; font-weight:500; color:var(--oscuro);">Plus Jakarta Sans</div>
+              <div style="font-size:10px; color:var(--muted); letter-spacing:1px; margin-top:2px;">Cuerpo · Labels · Specs</div>
+            </div>
+            <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--beige);">
+              <div style="font-size:10px; color:var(--muted); font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:6px;">Ratios</div>
+              <div style="font-size:11px; line-height:2; color:var(--cuerpo);">Feed: <strong>4:5</strong> — 1080 × 1350 px<br>Stories: <strong>9:16</strong> — 1080 × 1920 px</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- POST 1 — Consola Natural -->
+<!-- ══════════════════════════════════════════════ -->
+<section id="p1" class="post-section">
+  <div class="section-header">
+    <div class="section-eyebrow">Post 01 · Instagram · Facebook Marketplace</div>
+    <div class="section-title">CONSOLA NATURAL</div>
+    <div class="section-sub">mesa-arrime-natural-cesta.jpg · Madera restaurada natural · 2 cajones + estante</div>
+  </div>
+  <div class="preview-grid">
+    <div class="phone-col">
+      <div class="view-tabs">
+        <button class="view-tab active" onclick="toggleView(this,'feed','story','p1')">Feed 4:5</button>
+        <button class="view-tab" onclick="toggleView(this,'story','feed','p1')">Stories 9:16</button>
+      </div>
+
+      <!-- FEED -->
+      <div class="feed-wrap" id="feed-p1">
+        <div class="feed-mockup">
+          <img src="imagenes-catalogo-branded/mesa-arrime-natural-cesta.jpg" alt="Consola Natural">
+          <div class="feed-overlay"></div>
+          <div class="feed-logo-tag">Rústico</div>
+          <div class="feed-brand-tag">Pieza Única</div>
+          <div class="feed-content">
+            <div class="feed-tag">Madera Restaurada</div>
+            <div class="feed-nombre">Consola<br>Rústica Natural</div>
+            <div class="feed-specs">📐 ~90 × 35 × 80 cm<br>🌿 Madera restaurada · Hecha a mano<br>🚚 Envío incluido GBA</div>
+            <div class="feed-price">CONSULTAR</div>
+            <div class="feed-envio">Precio de fábrica · Envío incluido GBA</div>
+          </div>
+        </div>
+        <div class="download-bar">
+          <button class="download-btn" onclick="downloadMockup(this,'rustico-consola-natural.jpg')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar con diseño
+          </button>
+        </div>
+      </div>
+
+      <!-- STORY -->
+      <div class="story-wrap" id="story-p1">
+        <div class="story-nav">
+          <button class="story-dot active" onclick="showSlide('p1',1,this)">Slide 1</button>
+          <button class="story-dot" onclick="showSlide('p1',2,this)">Slide 2</button>
+          <button class="story-dot" onclick="showSlide('p1',3,this)">Slide 3</button>
+        </div>
+
+        <div class="story-frame" id="story-frame-p1">
+          <!-- Slide 1 -->
+          <div id="slide-p1-1">
+            <img src="imagenes-catalogo-branded/mesa-arrime-natural-cesta.jpg" alt="" style="filter:brightness(0.5);">
+            <div class="story-overlay story-s1-overlay"></div>
+            <div class="story-progress">
+              <div class="story-bar current"></div>
+              <div class="story-bar"></div>
+              <div class="story-bar"></div>
+            </div>
+            <div class="story-s1-text">
+              <h2>¿Buscás una pieza que cuente una historia?</h2>
+              <div class="story-sticker">Ver más 👇</div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div id="slide-p1-2" style="display:none; position:absolute; inset:0;">
+            <img src="imagenes-catalogo-branded/mesa-arrime-natural-cesta.jpg" alt="">
+            <div class="story-overlay story-s2-overlay"></div>
+            <div class="story-progress">
+              <div class="story-bar done"></div>
+              <div class="story-bar current"></div>
+              <div class="story-bar"></div>
+            </div>
+            <div class="story-s2-content">
+              <div class="s-tag">Disponible</div>
+              <h3>Consola Rústica Natural</h3>
+              <div class="s-specs">Madera restaurada · 2 cajones<br>Estante inferior · Hecha a mano</div>
+              <div class="s-price">CONSULTAR</div>
+              <div class="s-envio">✅ Con envío incluido GBA</div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div id="slide-p1-3" style="display:none; position:absolute; inset:0;">
+            <img src="imagenes-catalogo-branded/mesa-arrime-natural-cesta.jpg" alt="" style="filter:brightness(0.25);">
+            <div class="story-overlay story-s3-overlay" style="background:rgba(44,24,16,0.7)"></div>
+            <div class="story-progress">
+              <div class="story-bar done"></div>
+              <div class="story-bar done"></div>
+              <div class="story-bar current"></div>
+            </div>
+            <div class="story-s3-content">
+              <h2>Cada pieza es única 🌿</h2>
+              <p>Madera restaurada que no va a tener nadie más. Escribinos al DM para reservar.</p>
+              <div class="story-cta-btn">Escribinos al DM →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAPTIONS -->
+    <div class="caption-col">
+      <div class="caption-tabs">
+        <button class="cap-tab active" onclick="showCaption(this,'cap-p1-a')">Versión A · Emocional</button>
+        <button class="cap-tab" onclick="showCaption(this,'cap-p1-b')">Versión B · Directa</button>
+      </div>
+
+      <div class="caption-box active" id="cap-p1-a">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">La madera tiene memoria. 🪵
+
+Esta consola fue otra cosa antes. Hoy es la pieza que transforma la entrada o el living de tu casa.
+
+Cajones grandes, estante inferior, terminación artesanal con toques blancos envejecidos. Cada veta es irrepetible.
+
+📐 ~90 × 35 × 80 cm aprox.
+🌿 Madera restaurada · Pieza única
+🤝 Hecha a mano en GBA
+🚚 Envío incluido en GBA
+
+¿Te enamoraste? Escribinos al DM antes de que se vaya. 👇</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblesunicos #maderarestaurada #rustico #consola #decoracionhogar #mueblesartesanales #hechaamano #piezaunica #mueblesreciclados #interiorismo #homedecor #livingroom #mueblesargentina #decoracioninteriores #homedesign #campo #estilrustico #mueblesdemadera #recicladoconestilo #deco</div>
+      </div>
+
+      <div class="caption-box" id="cap-p1-b">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">🪵 Consola Rústica Natural — DISPONIBLE
+
+Madera restaurada · 2 cajones · estante · hecha a mano
+
+✅ Pieza única — no hay dos iguales
+🚚 Precio final con envío incluido al GBA
+
+👉 DM para precio y disponibilidad o pedí el catálogo completo</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblesunicos #maderarestaurada #rustico #hechaamano #piezaunica #mueblesargentina #gba #decorar #homedesign</div>
+        <div class="marketplace-box">
+          <div class="marketplace-label">Facebook Marketplace</div>
+          <div class="marketplace-titulo">Consola Rústica Madera Restaurada 2 Cajones Estante — Fábrica Rústico GBA</div>
+          <div class="marketplace-desc">Madera con historia. Ideal para living, comedor o pasillo.
+
+📐 ~90 × 35 × 80 cm
+🪵 Madera reciclada, terminación natural artesanal
+🤝 Hecha a mano · Pieza única
+💰 Precio de fábrica — consultar disponibilidad
+🚚 Entrega en todo GBA
+
+📩 Consultá → WhatsApp o Messenger</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- POST 2 — Aparador Multicolor -->
+<!-- ══════════════════════════════════════════════ -->
+<section id="p2" class="post-section">
+  <div class="section-header">
+    <div class="section-eyebrow">Post 02 · Instagram · Facebook Marketplace</div>
+    <div class="section-title">APARADOR MULTICOLOR</div>
+    <div class="section-sub">mesa-arrime-frente-cajones.jpg · Cajones naranja, amarillo, celeste · pintados a mano</div>
+  </div>
+  <div class="preview-grid">
+    <div class="phone-col">
+      <div class="view-tabs">
+        <button class="view-tab active" onclick="toggleView(this,'feed','story','p2')">Feed 4:5</button>
+        <button class="view-tab" onclick="toggleView(this,'story','feed','p2')">Stories 9:16</button>
+      </div>
+      <div class="feed-wrap" id="feed-p2">
+        <div class="feed-mockup">
+          <img src="imagenes-catalogo-branded/mesa-arrime-frente-cajones.jpg" alt="Aparador Multicolor">
+          <div class="feed-overlay"></div>
+          <div class="feed-logo-tag">Rústico</div>
+          <div class="feed-brand-tag">Pintado a Mano</div>
+          <div class="feed-content">
+            <div class="feed-tag">Colores Únicos</div>
+            <div class="feed-nombre">Aparador<br>Multicolor</div>
+            <div class="feed-specs">📐 ~90 × 40 × 90 cm<br>🎨 Naranja · Amarillo · Celeste<br>🚚 Envío incluido GBA</div>
+            <div class="feed-price">CONSULTAR</div>
+            <div class="feed-envio">También a tu color · Precio de fábrica</div>
+          </div>
+        </div>
+        <div class="download-bar">
+          <button class="download-btn" onclick="downloadMockup(this,'rustico-aparador-multicolor.jpg')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar con diseño
+          </button>
+        </div>
+      </div>
+      <div class="story-wrap" id="story-p2">
+        <div class="story-nav">
+          <button class="story-dot active" onclick="showSlide('p2',1,this)">Slide 1</button>
+          <button class="story-dot" onclick="showSlide('p2',2,this)">Slide 2</button>
+          <button class="story-dot" onclick="showSlide('p2',3,this)">Slide 3</button>
+        </div>
+        <div class="story-frame">
+          <div id="slide-p2-1">
+            <img src="imagenes-catalogo-branded/mesa-arrime-frente-cajones.jpg" alt="" style="filter:brightness(0.45);">
+            <div class="story-overlay story-s1-overlay"></div>
+            <div class="story-progress"><div class="story-bar current"></div><div class="story-bar"></div><div class="story-bar"></div></div>
+            <div class="story-s1-text"><h2>¿Tu casa necesita más color?</h2><div class="story-sticker">Ver más 👇</div></div>
+          </div>
+          <div id="slide-p2-2" style="display:none;position:absolute;inset:0;">
+            <img src="imagenes-catalogo-branded/mesa-arrime-frente-cajones.jpg" alt="">
+            <div class="story-overlay story-s2-overlay"></div>
+            <div class="story-progress"><div class="story-bar done"></div><div class="story-bar current"></div><div class="story-bar"></div></div>
+            <div class="story-s2-content">
+              <div class="s-tag">Disponible</div>
+              <h3>Aparador Rústico Multicolor</h3>
+              <div class="s-specs">Madera restaurada · Pintado a mano<br>Cajones naranja, amarillo y celeste</div>
+              <div class="s-price">CONSULTAR</div>
+              <div class="s-envio">✅ Con envío incluido GBA</div>
+            </div>
+          </div>
+          <div id="slide-p2-3" style="display:none;position:absolute;inset:0;">
+            <img src="imagenes-catalogo-branded/mesa-arrime-frente-cajones.jpg" alt="" style="filter:brightness(0.25);">
+            <div class="story-overlay" style="background:rgba(44,24,16,0.7)"></div>
+            <div class="story-progress"><div class="story-bar done"></div><div class="story-bar done"></div><div class="story-bar current"></div></div>
+            <div class="story-s3-content">
+              <h2>También lo hacemos en tus colores 🎨</h2>
+              <p>Elegí la combinación que más te guste y lo hacemos a pedido.</p>
+              <div class="story-cta-btn">Escribinos al DM →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="caption-col">
+      <div class="caption-tabs">
+        <button class="cap-tab active" onclick="showCaption(this,'cap-p2-a')">Versión A · Emocional</button>
+        <button class="cap-tab" onclick="showCaption(this,'cap-p2-b')">Versión B · Directa</button>
+      </div>
+      <div class="caption-box active" id="cap-p2-a">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">Hay muebles que decoran. Y hay muebles que alegran el cuarto entero. 🎨
+
+Este aparador nació de madera reciclada y ganó color en el taller. Tres cajones — naranja, amarillo, celeste — que no te vas a cansar de ver.
+
+Libros arriba, plantas al lado, sonrisa garantizada.
+
+📐 ~90 × 40 × 90 cm aprox.
+🌿 Madera restaurada · Pintado a mano
+🤝 Hecho en nuestro taller en GBA
+🚚 Envío incluido en GBA
+
+¿Cuál es tu color favorito de los tres? 👇 Comentá abajo.</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblesunicos #maderarestaurada #rustico #aparador #decoracionhogar #mueblesartesanales #hechaamano #piezaunica #mueblesreciclados #interiorismo #homedecor #livingroom #mueblesargentina #homedesign #campo #estilrustico #colores #deco #recicladoconestilo</div>
+      </div>
+      <div class="caption-box" id="cap-p2-b">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">🎨 Aparador Multicolor — DISPONIBLE
+
+Madera restaurada · 3 cajones pintados a mano · 2 puertas · estante abierto
+
+✅ Pieza única — color y alma en un solo mueble
+🚚 Envío incluido en GBA
+
+👉 DM para precio y disponibilidad · También hacemos a medida y color a elección</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblesunicos #aparador #maderarestaurada #rustico #hechaamano #mueblesargentina #deco #colorful #homedesign</div>
+        <div class="marketplace-box">
+          <div class="marketplace-label">Facebook Marketplace</div>
+          <div class="marketplace-titulo">Aparador Rústico Multicolor Madera Reciclada Cajones — Fábrica Rústico GBA</div>
+          <div class="marketplace-desc">Color, textura y funcionalidad en un solo mueble. 3 cajones pintados a mano, estante abierto y 2 puertas.
+
+📐 ~90 × 40 × 90 cm aprox.
+🪵 Madera reciclada, pintado a mano
+💰 Precio de fábrica — consultar disponibilidad
+🚚 Entrega en todo GBA
+
+También a medida con tus colores.
+📩 Consultá → WhatsApp o Messenger</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- POST 3 — Verde Menta -->
+<!-- ══════════════════════════════════════════════ -->
+<section id="p3" class="post-section">
+  <div class="section-header">
+    <div class="section-eyebrow">Post 03 · Instagram · Facebook Marketplace</div>
+    <div class="section-title">APARADOR VERDE MENTA</div>
+    <div class="section-sub">mesa-arrime-verde-baldas.jpg · 3 cajones turquesa · Tiradores bronce · 3 baldas</div>
+  </div>
+  <div class="preview-grid">
+    <div class="phone-col">
+      <div class="view-tabs">
+        <button class="view-tab active" onclick="toggleView(this,'feed','story','p3')">Feed 4:5</button>
+        <button class="view-tab" onclick="toggleView(this,'story','feed','p3')">Stories 9:16</button>
+      </div>
+      <div class="feed-wrap" id="feed-p3">
+        <div class="feed-mockup">
+          <img src="imagenes-catalogo-branded/mesa-arrime-verde-baldas.jpg" alt="Aparador Verde Menta">
+          <div class="feed-overlay"></div>
+          <div class="feed-logo-tag">Rústico</div>
+          <div class="feed-brand-tag">Pieza Única</div>
+          <div class="feed-content">
+            <div class="feed-tag">Estilo Provenzal Rústico</div>
+            <div class="feed-nombre">Aparador<br>Verde Menta</div>
+            <div class="feed-specs">📐 ~100 × 40 × 90 cm<br>🌿 Cajones verde menta · Tiradores bronce<br>🚚 Envío incluido GBA</div>
+            <div class="feed-price">CONSULTAR</div>
+            <div class="feed-envio">Precio de fábrica · Envío incluido GBA</div>
+          </div>
+        </div>
+        <div class="download-bar">
+          <button class="download-btn green" onclick="downloadMockup(this,'rustico-aparador-verde-menta.jpg')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar con diseño
+          </button>
+        </div>
+      </div>
+      <div class="story-wrap" id="story-p3">
+        <div class="story-nav">
+          <button class="story-dot active" onclick="showSlide('p3',1,this)">Slide 1</button>
+          <button class="story-dot" onclick="showSlide('p3',2,this)">Slide 2</button>
+          <button class="story-dot" onclick="showSlide('p3',3,this)">Slide 3</button>
+        </div>
+        <div class="story-frame">
+          <div id="slide-p3-1">
+            <img src="imagenes-catalogo-branded/mesa-arrime-verde-baldas.jpg" alt="" style="filter:brightness(0.45);">
+            <div class="story-overlay story-s1-overlay"></div>
+            <div class="story-progress"><div class="story-bar current"></div><div class="story-bar"></div><div class="story-bar"></div></div>
+            <div class="story-s1-text"><h2>Verde menta + madera = esa combinación perfecta</h2><div class="story-sticker">Ver más 👇</div></div>
+          </div>
+          <div id="slide-p3-2" style="display:none;position:absolute;inset:0;">
+            <img src="imagenes-catalogo-branded/mesa-arrime-verde-baldas.jpg" alt="">
+            <div class="story-overlay story-s2-overlay"></div>
+            <div class="story-progress"><div class="story-bar done"></div><div class="story-bar current"></div><div class="story-bar"></div></div>
+            <div class="story-s2-content">
+              <div class="s-tag">Disponible</div>
+              <h3>Aparador Rústico Verde Menta</h3>
+              <div class="s-specs">Madera restaurada · 3 cajones<br>Tiradores bronce · 3 baldas</div>
+              <div class="s-price">CONSULTAR</div>
+              <div class="s-envio">✅ Con envío incluido GBA</div>
+            </div>
+          </div>
+          <div id="slide-p3-3" style="display:none;position:absolute;inset:0;">
+            <img src="imagenes-catalogo-branded/mesa-arrime-verde-baldas.jpg" alt="" style="filter:brightness(0.25);">
+            <div class="story-overlay" style="background:rgba(44,24,16,0.7)"></div>
+            <div class="story-progress"><div class="story-bar done"></div><div class="story-bar done"></div><div class="story-bar current"></div></div>
+            <div class="story-s3-content">
+              <h2>Stock limitado 🌿</h2>
+              <p>Piezas únicas — no las fabricamos en serie.</p>
+              <div class="story-cta-btn">Escribinos al DM →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="caption-col">
+      <div class="caption-tabs">
+        <button class="cap-tab active" onclick="showCaption(this,'cap-p3-a')">Versión A · Emocional</button>
+        <button class="cap-tab" onclick="showCaption(this,'cap-p3-b')">Versión B · Directa</button>
+      </div>
+      <div class="caption-box active" id="cap-p3-a">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">Verde que te quiero verde. 🌿
+
+Cuando el taller termina una pieza así, nos cuesta dejarla ir. Tres cajones en verde menta, tiradores de bronce envejecido y madera que tuvo otra vida antes de esta.
+
+Perfecta para cocina, living o galería.
+
+📐 ~100 × 40 × 90 cm aprox.
+🌿 Madera restaurada · Cajones verde menta · Tiradores bronce
+🤝 Hecha a mano
+🚚 Envío incluido en GBA
+
+¿La imaginás en tu espacio? 💬 Contanos abajo.</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblesunicos #maderarestaurada #rustico #aparador #verdementa #decoracionhogar #mueblesartesanales #hechaamano #piezaunica #mueblesreciclados #interiorismo #homedecor #mueblesargentina #homedesign #campo #estilrustico #tiradoresbronce #deco #recicladoconestilo</div>
+      </div>
+      <div class="caption-box" id="cap-p3-b">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">🌿 Aparador Verde Menta — DISPONIBLE
+
+Madera restaurada · 3 cajones verde menta · Tiradores dorados · 3 baldas
+
+✅ Pieza única — estilo provenzal rústico
+🚚 Envío incluido en GBA
+
+👉 DM para precio y disponibilidad</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblesunicos #aparador #maderarestaurada #verdementa #rustico #hechaamano #piezaunica #mueblesargentina #homedesign</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- POST 4 — Natural Puertas -->
+<!-- ══════════════════════════════════════════════ -->
+<section id="p4" class="post-section">
+  <div class="section-header">
+    <div class="section-eyebrow">Post 04 · Instagram · Facebook Marketplace</div>
+    <div class="section-title">APARADOR NATURAL ASIMÉTRICO</div>
+    <div class="section-sub">mesa-arrime-natural-puertas.jpg · Estantes abiertos + cajón + puerta · madera envejecida</div>
+  </div>
+  <div class="preview-grid">
+    <div class="phone-col">
+      <div class="view-tabs">
+        <button class="view-tab active" onclick="toggleView(this,'feed','story','p4')">Feed 4:5</button>
+        <button class="view-tab" onclick="toggleView(this,'story','feed','p4')">Stories 9:16</button>
+      </div>
+      <div class="feed-wrap" id="feed-p4">
+        <div class="feed-mockup">
+          <img src="imagenes-catalogo-branded/mesa-arrime-natural-puertas.jpg" alt="">
+          <div class="feed-overlay"></div>
+          <div class="feed-logo-tag">Rústico</div>
+          <div class="feed-brand-tag">Taller Propio</div>
+          <div class="feed-content">
+            <div class="feed-tag">Natural Envejecido</div>
+            <div class="feed-nombre">Aparador<br>Natural</div>
+            <div class="feed-specs">📐 ~90 × 38 × 85 cm<br>🌿 Madera natural envejecida<br>🚚 Envío incluido GBA</div>
+            <div class="feed-price">CONSULTAR</div>
+            <div class="feed-envio">Precio de fábrica · Envío incluido GBA</div>
+          </div>
+        </div>
+        <div class="download-bar">
+          <button class="download-btn" onclick="downloadMockup(this,'rustico-aparador-natural-puertas.jpg')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar con diseño
+          </button>
+        </div>
+      </div>
+      <div class="story-wrap" id="story-p4">
+        <div class="story-nav">
+          <button class="story-dot active" onclick="showSlide('p4',1,this)">Slide 1</button>
+          <button class="story-dot" onclick="showSlide('p4',2,this)">Slide 2</button>
+          <button class="story-dot" onclick="showSlide('p4',3,this)">Slide 3</button>
+        </div>
+        <div class="story-frame">
+          <div id="slide-p4-1">
+            <img src="imagenes-catalogo-branded/mesa-arrime-natural-puertas.jpg" alt="" style="filter:brightness(0.4);">
+            <div class="story-overlay story-s1-overlay"></div>
+            <div class="story-progress"><div class="story-bar current"></div><div class="story-bar"></div><div class="story-bar"></div></div>
+            <div class="story-s1-text"><h2>No todo tiene que ser simétrico para ser perfecto.</h2><div class="story-sticker">Ver más 👇</div></div>
+          </div>
+          <div id="slide-p4-2" style="display:none;position:absolute;inset:0;">
+            <img src="imagenes-catalogo-branded/mesa-arrime-natural-puertas.jpg" alt="">
+            <div class="story-overlay story-s2-overlay"></div>
+            <div class="story-progress"><div class="story-bar done"></div><div class="story-bar current"></div><div class="story-bar"></div></div>
+            <div class="story-s2-content">
+              <div class="s-tag">Disponible</div>
+              <h3>Aparador Natural Asimétrico</h3>
+              <div class="s-specs">Madera restaurada · Estantes abiertos<br>Cajón + puerta · Envejecido natural</div>
+              <div class="s-price">CONSULTAR</div>
+              <div class="s-envio">✅ Con envío incluido GBA</div>
+            </div>
+          </div>
+          <div id="slide-p4-3" style="display:none;position:absolute;inset:0;">
+            <img src="imagenes-catalogo-branded/mesa-arrime-natural-puertas.jpg" alt="" style="filter:brightness(0.2);">
+            <div class="story-overlay" style="background:rgba(44,24,16,0.7)"></div>
+            <div class="story-progress"><div class="story-bar done"></div><div class="story-bar done"></div><div class="story-bar current"></div></div>
+            <div class="story-s3-content">
+              <h2>Funcional. Único. Nuestro. 🪵</h2>
+              <p>Escribinos al DM o tocá el link para ver el catálogo completo.</p>
+              <div class="story-cta-btn">Ver Catálogo →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="caption-col">
+      <div class="caption-tabs">
+        <button class="cap-tab active" onclick="showCaption(this,'cap-p4-a')">Caption · Emocional</button>
+      </div>
+      <div class="caption-box active" id="cap-p4-a">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">No todo tiene que ser simétrico para ser perfecto. 🪵
+
+Este aparador tiene su propia lógica: estantes abiertos de un lado, cajón y puerta del otro. Madera natural con pinceladas blancas que el tiempo ya hizo suyas.
+
+Funcional. Único. Nuestro.
+
+📐 ~90 × 38 × 85 cm aprox.
+🌿 Madera restaurada · Terminación natural envejecida
+🤝 Hecho en taller propio
+🚚 Envío incluido en GBA
+
+👉 DM o dejá un 💬 y te mandamos el catálogo.</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblesunicos #maderarestaurada #rustico #aparador #decoracionhogar #mueblesartesanales #hechaamano #piezaunica #mueblesreciclados #interiorismo #homedecor #livingroom #mueblesargentina #homedesign #estilrustico #natural #deco #recicladoconestilo</div>
+        <div class="marketplace-box">
+          <div class="marketplace-label">Facebook Marketplace</div>
+          <div class="marketplace-titulo">Aparador Rústico Natural Madera Reciclada Cajón Estantes Puerta — Fábrica GBA</div>
+          <div class="marketplace-desc">Diseño asimétrico con estantes abiertos, cajón y puerta. Terminación natural envejecida. Ideal para living, comedor o estudio.
+
+📐 ~90 × 38 × 85 cm
+🪵 Madera reciclada, terminación envejecida
+💰 Precio de fábrica — consultar disponibilidad
+🚚 Entrega en todo GBA
+📩 Consultá → WhatsApp o Messenger</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- POST 5 — 4 Cajones Oscuro -->
+<!-- ══════════════════════════════════════════════ -->
+<section id="p5" class="post-section">
+  <div class="section-header">
+    <div class="section-eyebrow">Post 05 · Instagram · Facebook Marketplace</div>
+    <div class="section-title">APARADOR 4 CAJONES OSCURO</div>
+    <div class="section-sub">mesa-arrime-rustica-cajones.jpg · Estructura oscura · Cajones claros · Estilo artesanal robusto</div>
+  </div>
+  <div class="preview-grid">
+    <div class="phone-col">
+      <div class="view-tabs">
+        <button class="view-tab active" onclick="toggleView(this,'feed','story','p5')">Feed 4:5</button>
+        <button class="view-tab" onclick="toggleView(this,'story','feed','p5')">Stories 9:16</button>
+      </div>
+      <div class="feed-wrap" id="feed-p5">
+        <div class="feed-mockup">
+          <img src="imagenes-catalogo-branded/mesa-arrime-rustica-cajones.jpg" alt="">
+          <div class="feed-overlay"></div>
+          <div class="feed-logo-tag">Rústico</div>
+          <div class="feed-brand-tag">Hecho a Mano</div>
+          <div class="feed-content">
+            <div class="feed-tag">Madera Reciclada</div>
+            <div class="feed-nombre">Aparador<br>Rústico<br>4 Cajones</div>
+            <div class="feed-specs">📐 ~90 × 40 × 88 cm<br>🌿 Estructura oscura · Cajones naturales<br>🚚 Envío incluido GBA</div>
+            <div class="feed-price">CONSULTAR</div>
+            <div class="feed-envio">Precio de fábrica · Envío incluido GBA</div>
+          </div>
+        </div>
+        <div class="download-bar">
+          <button class="download-btn" onclick="downloadMockup(this,'rustico-aparador-4cajones-oscuro.jpg')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar con diseño
+          </button>
+        </div>
+      </div>
+      <div class="story-wrap" id="story-p5">
+        <div class="story-nav">
+          <button class="story-dot active" onclick="showSlide('p5',1,this)">Slide 1</button>
+          <button class="story-dot" onclick="showSlide('p5',2,this)">Slide 2</button>
+          <button class="story-dot" onclick="showSlide('p5',3,this)">Slide 3</button>
+        </div>
+        <div class="story-frame">
+          <div id="slide-p5-1">
+            <img src="imagenes-catalogo-branded/mesa-arrime-rustica-cajones.jpg" alt="" style="filter:brightness(0.4);">
+            <div class="story-overlay story-s1-overlay"></div>
+            <div class="story-progress"><div class="story-bar current"></div><div class="story-bar"></div><div class="story-bar"></div></div>
+            <div class="story-s1-text"><h2>Robusta. Artesanal. De las que duran toda la vida.</h2><div class="story-sticker">Ver más 👇</div></div>
+          </div>
+          <div id="slide-p5-2" style="display:none;position:absolute;inset:0;">
+            <img src="imagenes-catalogo-branded/mesa-arrime-rustica-cajones.jpg" alt="">
+            <div class="story-overlay story-s2-overlay"></div>
+            <div class="story-progress"><div class="story-bar done"></div><div class="story-bar current"></div><div class="story-bar"></div></div>
+            <div class="story-s2-content">
+              <div class="s-tag">Disponible</div>
+              <h3>Aparador 4 Cajones Rústico</h3>
+              <div class="s-specs">Madera reciclada · Estructura oscura<br>4 cajones naturales · Estante central</div>
+              <div class="s-price">CONSULTAR</div>
+              <div class="s-envio">✅ Con envío incluido GBA</div>
+            </div>
+          </div>
+          <div id="slide-p5-3" style="display:none;position:absolute;inset:0;">
+            <img src="imagenes-catalogo-branded/mesa-arrime-rustica-cajones.jpg" alt="" style="filter:brightness(0.2);">
+            <div class="story-overlay" style="background:rgba(44,24,16,0.7)"></div>
+            <div class="story-progress"><div class="story-bar done"></div><div class="story-bar done"></div><div class="story-bar current"></div></div>
+            <div class="story-s3-content">
+              <h2>¿La ves en tu cocina o en tu living? 🪵</h2>
+              <p>Escribinos y te mandamos más fotos y el catálogo completo.</p>
+              <div class="story-cta-btn">Escribinos al DM →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="caption-col">
+      <div class="caption-tabs">
+        <button class="cap-tab active" onclick="showCaption(this,'cap-p5-a')">Caption · Emocional</button>
+      </div>
+      <div class="caption-box active" id="cap-p5-a">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">Robusta. Artesanal. De las que duran toda la vida. 🪵
+
+Cuatro cajones de madera clara sobre estructura oscura, estante central, y esa solidez que sólo te da un mueble hecho a mano.
+
+No hace falta decorarla mucho. Ella sola habla.
+
+📐 ~90 × 40 × 88 cm aprox.
+🌿 Madera restaurada · Estructura oscura · Cajones naturales
+🤝 Hecha a mano en taller propio
+🚚 Envío incluido en GBA
+
+¿La ves en tu cocina o en tu living? Escribinos. 👇</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblesunicos #maderarestaurada #rustico #aparador #decoracionhogar #mueblesartesanales #hechaamano #piezaunica #mueblesreciclados #interiorismo #homedecor #mueblesargentina #homedesign #estilrustico #campo #deco #recicladoconestilo #mueblesdemadera</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- POST 6 — Rack TV -->
+<!-- ══════════════════════════════════════════════ -->
+<section id="p6" class="post-section">
+  <div class="section-header">
+    <div class="section-eyebrow">Post 06 · Instagram Carrusel · Facebook Marketplace</div>
+    <div class="section-title">RACK TV TURQUESA + FUCSIA</div>
+    <div class="section-sub">Carrusel: rack-tv-turquesa-fucsia-01.jpg + 02.jpg + 03.jpg · En living real de clienta</div>
+  </div>
+  <div class="preview-grid">
+    <div class="phone-col">
+      <div class="view-tabs">
+        <button class="view-tab active" onclick="toggleView(this,'feed','story','p6')">Feed 4:5</button>
+        <button class="view-tab" onclick="toggleView(this,'story','feed','p6')">Stories 9:16</button>
+      </div>
+      <div class="feed-wrap" id="feed-p6">
+        <!-- Carrusel mini -->
+        <div style="margin-bottom:10px; display:flex; gap:6px;">
+          <button class="view-tab active" style="font-size:9px;padding:5px 10px;" onclick="switchCarousel(this,'img-rack','rack-tv-turquesa-fucsia-01.jpg')">Foto 1</button>
+          <button class="view-tab" style="font-size:9px;padding:5px 10px;" onclick="switchCarousel(this,'img-rack','rack-tv-turquesa-fucsia-02.jpg')">Foto 2</button>
+          <button class="view-tab" style="font-size:9px;padding:5px 10px;" onclick="switchCarousel(this,'img-rack','rack-tv-turquesa-fucsia-03.jpg')">Foto 3</button>
+        </div>
+        <div class="feed-mockup">
+          <img id="img-rack" src="imagenes-catalogo-branded/rack-tv-turquesa-fucsia-01.jpg" alt="">
+          <div class="feed-overlay"></div>
+          <div class="feed-logo-tag">Rústico</div>
+          <div class="feed-brand-tag">Cliente Real ✓</div>
+          <div class="feed-content">
+            <div class="feed-tag">En su living</div>
+            <div class="feed-nombre">Rack TV<br>Turquesa<br>+ Fucsia</div>
+            <div class="feed-specs">📐 ~160 × 45 × 55 cm<br>🎨 A pedido · Colores a elección<br>🚚 Envío incluido GBA</div>
+            <div class="feed-price">CONSULTAR</div>
+            <div class="feed-envio">A medida · Precio de fábrica</div>
+          </div>
+        </div>
+        <div style="font-size:10px; color:var(--muted); margin-top:8px; font-style:italic;">← Cambiar foto del carrusel →</div>
+        <div class="download-bar">
+          <button class="download-btn" onclick="downloadMockup(this,'rustico-rack-tv-turquesa-foto1.jpg')" title="Cambiá la foto del carrusel arriba antes de descargar">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar foto activa con diseño
+          </button>
+        </div>
+      </div>
+      <div class="story-wrap" id="story-p6">
+        <div class="story-nav">
+          <button class="story-dot active" onclick="showSlide('p6',1,this)">Slide 1</button>
+          <button class="story-dot" onclick="showSlide('p6',2,this)">Slide 2</button>
+          <button class="story-dot" onclick="showSlide('p6',3,this)">Slide 3</button>
+        </div>
+        <div class="story-frame">
+          <div id="slide-p6-1">
+            <img src="imagenes-catalogo-branded/rack-tv-turquesa-fucsia-01.jpg" alt="" style="filter:brightness(0.5);">
+            <div class="story-overlay story-s1-overlay"></div>
+            <div class="story-progress"><div class="story-bar current"></div><div class="story-bar"></div><div class="story-bar"></div></div>
+            <div class="story-s1-text"><h2>¿Cómo quedaría esto en tu living?</h2><div class="story-sticker">Ver más 👇</div></div>
+          </div>
+          <div id="slide-p6-2" style="display:none;position:absolute;inset:0;">
+            <img src="imagenes-catalogo-branded/rack-tv-turquesa-fucsia-02.jpg" alt="">
+            <div class="story-overlay story-s2-overlay"></div>
+            <div class="story-progress"><div class="story-bar done"></div><div class="story-bar current"></div><div class="story-bar"></div></div>
+            <div class="story-s2-content">
+              <div class="s-tag">A pedido</div>
+              <h3>Rack TV Turquesa + Fucsia</h3>
+              <div class="s-specs">Lo hicimos con los colores<br>que ella eligió 🎨</div>
+              <div class="s-price">CONSULTAR</div>
+              <div class="s-envio">✅ A medida · GBA incluido</div>
+            </div>
+          </div>
+          <div id="slide-p6-3" style="display:none;position:absolute;inset:0;">
+            <img src="imagenes-catalogo-branded/rack-tv-turquesa-fucsia-03.jpg" alt="" style="filter:brightness(0.3);">
+            <div class="story-overlay" style="background:rgba(44,24,16,0.65)"></div>
+            <div class="story-progress"><div class="story-bar done"></div><div class="story-bar done"></div><div class="story-bar current"></div></div>
+            <div class="story-s3-content">
+              <h2>El tuyo puede ser en los colores que quieras 💚💜</h2>
+              <p>Escribinos al DM y lo cotizamos.</p>
+              <div class="story-cta-btn">Cotizar el mío →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="caption-col">
+      <div class="caption-tabs">
+        <button class="cap-tab active" onclick="showCaption(this,'cap-p6-a')">Versión A · Emocional</button>
+        <button class="cap-tab" onclick="showCaption(this,'cap-p6-b')">Versión B · Directa</button>
+      </div>
+      <div class="caption-box active" id="cap-p6-a">
+        <div class="caption-label">Caption Instagram (Carrusel)</div>
+        <div class="caption-text">Cuando una clienta nos manda esta foto desde su living, sabemos que hicimos bien el trabajo. 💚💜
+
+Este rack TV en turquesa y fucsia llegó a su hogar y lo transformó. Madera reciclada, pintado a mano, instalado con cariño.
+
+Cada color que ves fue elegido con ella. Así trabajamos en Rústico.
+
+📐 ~160 × 45 × 55 cm aprox.
+🌿 Madera restaurada · Turquesa + Fucsia
+🤝 Hecho a pedido · Colores a elección
+🚚 Envío incluido en GBA
+
+¿Qué combinación de colores te gustaría a vos? 💬</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblesunicos #maderarestaurada #rustico #racktv #muebletv #decoracionhogar #mueblesartesanales #hechaamano #piezaunica #mueblesreciclados #interiorismo #homedecor #livingroom #mueblesargentina #decoracioninteriores #homedesign #campo #estilrustico #recicladoconestilo #clientesfelices</div>
+      </div>
+      <div class="caption-box" id="cap-p6-b">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">💚💜 Rack TV Turquesa + Fucsia — ASÍ QUEDÓ en el living de nuestra clienta
+
+Madera restaurada · Pintado a mano · A medida
+
+✅ Lo hacemos en los colores que vos elijas
+🚚 Precio final con envío incluido en GBA
+
+👉 DM para cotizar el tuyo</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblesunicos #racktv #muebletv #maderarestaurada #rustico #hechaamano #mueblesargentina #homedesign #clientesfelices</div>
+        <div class="marketplace-box">
+          <div class="marketplace-label">Facebook Marketplace</div>
+          <div class="marketplace-titulo">Rack TV Rústico Madera Reciclada Turquesa Fucsia 160cm — Fábrica GBA</div>
+          <div class="marketplace-desc">Rack TV artesanal pintado a mano. Cajón, puertas y estante. También disponible en otros colores a pedido.
+
+📐 ~160 × 45 × 55 cm aprox.
+🪵 Madera reciclada, pintado a mano
+🤝 A pedido · Colores y medidas a elección
+💰 Precio de fábrica — consultar disponibilidad
+🚚 Entrega en todo GBA
+📩 Consultá → WhatsApp o Messenger</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- POST 7 — #HechoAMano -->
+<!-- ══════════════════════════════════════════════ -->
+<section id="p7" class="post-section">
+  <div class="section-header">
+    <div class="section-eyebrow">Post 07 · Post de Marca · Storytelling</div>
+    <div class="section-title">#HECHOAMANO</div>
+    <div class="section-sub">referencia-varios-01.jpg · Post de taller · Storytelling del proceso</div>
+  </div>
+  <div class="preview-grid">
+    <div class="phone-col">
+      <div class="view-tabs">
+        <button class="view-tab active" onclick="toggleView(this,'feed','story','p7')">Feed 4:5</button>
+      </div>
+      <div class="feed-wrap" id="feed-p7">
+        <div class="feed-mockup">
+          <img src="imagenes-catalogo-branded/referencia-varios-01.jpg" alt="">
+          <div class="feed-overlay" style="background:linear-gradient(to top, rgba(44,24,16,0.85) 0%, rgba(44,24,16,0.1) 70%)"></div>
+          <div class="feed-logo-tag">Rústico</div>
+          <div class="feed-brand-tag">#HechoAMano</div>
+          <div class="feed-content">
+            <div class="feed-tag">Taller Propio · GBA</div>
+            <div class="feed-nombre">Madera<br>Reciclada<br>+ Diseño</div>
+            <div class="feed-specs">🔨 Todo empieza en el taller<br>🌿 Madera que tuvo otra vida</div>
+            <div style="font-family:var(--font-display); font-size:22px; color:var(--dorado); margin-bottom:4px; letter-spacing:2px;">HECHO A MANO EN GBA</div>
+            <div class="feed-envio">Ver catálogo completo → DM</div>
+          </div>
+        </div>
+        <div class="download-bar">
+          <button class="download-btn" onclick="downloadMockup(this,'rustico-hechoamano-mesitas.jpg')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar con diseño
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="caption-col">
+      <div class="caption-tabs">
+        <button class="cap-tab active" onclick="showCaption(this,'cap-p7-a')">Versión A · Storytelling</button>
+        <button class="cap-tab" onclick="showCaption(this,'cap-p7-b')">Versión B · Directa</button>
+      </div>
+      <div class="caption-box active" id="cap-p7-a">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">Todo empieza en el taller. 🔨
+
+Madera que fue tabla, viga o parte de otra cosa. Nosotros la traemos de vuelta — lijada, ensamblada, terminada a mano.
+
+Estas mesitas de luz nacieron así. Y van a durar décadas más.
+
+🌿 Madera reciclada + diseño funcional
+🤝 Hecho a mano en GBA
+
+¿Querés ver todo lo que hacemos? 👉 Pedí el catálogo completo por DM.</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#hechoamano #mueblesunicos #maderarestaurada #rustico #mesasdeluz #decoracionhogar #mueblesartesanales #piezaunica #mueblesreciclados #interiorismo #homedecor #mueblesargentina #homedesign #campo #estilrustico #recicladoconestilo #taller #proceso #sustentable</div>
+      </div>
+      <div class="caption-box" id="cap-p7-b">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">🔨 #HechoAMano — así salen cada pieza de nuestro taller
+
+Madera reciclada que se convierte en muebles únicos para tu hogar.
+
+✅ Hacemos aparadores · racks TV · mesas · mesitas · vitrinas y más
+🚚 Envío en GBA incluido
+
+👉 DM o link en bio para ver el catálogo completo</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblesunicos #hechoamano #maderarestaurada #rustico #mueblesargentina #piezaunica #gba</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- POST 8 — Mesa Ratona -->
+<!-- ══════════════════════════════════════════════ -->
+<section id="p8" class="post-section">
+  <div class="section-header">
+    <div class="section-eyebrow">Post 08 · Post de Marca · Sustentabilidad</div>
+    <div class="section-title">MESA RATONA · DOS VIDAS</div>
+    <div class="section-sub">referencia-varios-02.jpg · #MueblesSustentables · Mesa ratona multicolor + natural</div>
+  </div>
+  <div class="preview-grid">
+    <div class="phone-col">
+      <div class="view-tabs">
+        <button class="view-tab active" onclick="toggleView(this,'feed','story','p8')">Feed 4:5</button>
+      </div>
+      <div class="feed-wrap" id="feed-p8">
+        <div class="feed-mockup">
+          <img src="imagenes-catalogo-branded/referencia-varios-02.jpg" alt="">
+          <div class="feed-overlay" style="background:linear-gradient(to top, rgba(44,24,16,0.88) 0%, rgba(44,24,16,0.1) 65%)"></div>
+          <div class="feed-logo-tag">Rústico</div>
+          <div class="feed-brand-tag">#Sustentable</div>
+          <div class="feed-content">
+            <div class="feed-tag">Madera Reciclada</div>
+            <div class="feed-nombre">Mesa<br>Ratona</div>
+            <div class="feed-specs">🌱 Una mesa tiene dos vidas<br>🌿 Madera restaurada · Pieza única<br>🚚 Envío incluido GBA</div>
+            <div class="feed-price">CONSULTAR</div>
+            <div class="feed-envio">Precio de fábrica · Envío incluido GBA</div>
+          </div>
+        </div>
+        <div class="download-bar">
+          <button class="download-btn green" onclick="downloadMockup(this,'rustico-mesa-ratona.jpg')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar con diseño
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="caption-col">
+      <div class="caption-tabs">
+        <button class="cap-tab active" onclick="showCaption(this,'cap-p8-a')">Caption · Sustentabilidad</button>
+      </div>
+      <div class="caption-box active" id="cap-p8-a">
+        <div class="caption-label">Caption Instagram</div>
+        <div class="caption-text">Una mesa tiene dos vidas. 🌱
+
+La primera, cuando era árbol. La segunda, cuando sale de nuestro taller.
+
+Cada mesa ratona que hacemos empieza siendo madera reciclada — sin historia ni destino claro. Nosotros le damos forma, color y un hogar.
+
+📐 Living, comedor, galería — donde la imaginés.
+🌿 Madera restaurada · Pieza única
+🚚 Envío incluido en GBA
+
+¿Qué te parece más: la multicolor o la natural? 💬 Comentá abajo.</div>
+        <div class="caption-label">Hashtags</div>
+        <div class="hashtags">#mueblessustentables #mesaratona #maderarestaurada #rustico #decoracionhogar #mueblesartesanales #hechaamano #piezaunica #mueblesreciclados #interiorismo #homedecor #livingroom #mueblesargentina #homedesign #campo #estilrustico #recicladoconestilo #sustentable #ecodeco</div>
+        <div class="marketplace-box">
+          <div class="marketplace-label">Facebook Marketplace</div>
+          <div class="marketplace-titulo">Mesa Ratona Rústica Madera Reciclada Living — Fábrica Rústico GBA</div>
+          <div class="marketplace-desc">Mesa ratona artesanal de madera reciclada. Natural o colores a elección.
+
+📐 Medidas según disponibilidad o a pedido
+🪵 Madera reciclada
+🤝 Hecha en taller propio · Pieza única
+💰 Precio de fábrica — consultar disponibilidad
+🚚 Entrega en todo GBA
+📩 Consultá → WhatsApp o Messenger</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+const DL_ICON = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+
+/* Dibuja texto en múltiples líneas separadas por \n, de abajo hacia arriba.
+   Retorna la nueva posición Y (más arriba). */
+function drawLinesUp(ctx, text, x, startY, lineH) {
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  let y = startY;
+  for (let i = lines.length - 1; i >= 0; i--) {
+    ctx.fillText(lines[i], x, y);
+    y -= lineH;
+  }
+  return y;
+}
+
+async function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload  = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+async function downloadMockup(btn, filename) {
+  const feedWrap = btn.closest('.download-bar').parentElement;
+  const mockup   = feedWrap.querySelector('.feed-mockup');
+  if (!mockup) return;
+
+  btn.innerHTML = '⏳ Generando...';
+  btn.style.opacity = '0.6';
+  btn.style.pointerEvents = 'none';
+
+  try {
+    await document.fonts.ready;
+
+    const imgEl    = mockup.querySelector('img');
+    const content  = mockup.querySelector('.feed-content');
+    const tag      = content?.querySelector('.feed-tag')?.textContent?.trim() || '';
+    const nombre   = content?.querySelector('.feed-nombre')?.innerText?.trim() || '';
+    const specs    = content?.querySelector('.feed-specs')?.innerText?.trim() || '';
+    const price    = content?.querySelector('.feed-price')?.textContent?.trim() || '';
+    const envio    = content?.querySelector('.feed-envio')?.textContent?.trim() || '';
+    const brandTag = mockup.querySelector('.feed-brand-tag')?.textContent?.trim() || '';
+    const logoTag  = mockup.querySelector('.feed-logo-tag')?.textContent?.trim() || 'Rústico';
+
+    /* Canvas 1080×1350 (ratio 4:5 Instagram feed) */
+    const W = 1080, H = 1350;
+    const canvas  = document.createElement('canvas');
+    canvas.width  = W;
+    canvas.height = H;
+    const ctx = canvas.getContext('2d');
+
+    /* ── Imagen de fondo (object-fit: cover) ── */
+    const bgImg  = await loadImage(imgEl.src);
+    const iRatio = bgImg.naturalWidth / bgImg.naturalHeight;
+    const cRatio = W / H;
+    let sx = 0, sy = 0, sw = bgImg.naturalWidth, sh = bgImg.naturalHeight;
+    if (iRatio > cRatio) { sw = sh * cRatio; sx = (bgImg.naturalWidth - sw) / 2; }
+    else                  { sh = sw / cRatio; sy = (bgImg.naturalHeight - sh) / 2; }
+    ctx.drawImage(bgImg, sx, sy, sw, sh, 0, 0, W, H);
+
+    /* ── Overlay degradado oscuro ── */
+    const grad = ctx.createLinearGradient(0, H, 0, 0);
+    grad.addColorStop(0,    'rgba(44,24,16,0.93)');
+    grad.addColorStop(0.45, 'rgba(44,24,16,0.42)');
+    grad.addColorStop(1,    'rgba(44,24,16,0.06)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    /* ── Logo tag (arriba izquierda) ── */
+    ctx.font      = '500 38px "Plus Jakarta Sans"';
+    ctx.fillStyle = 'rgba(200,169,110,0.85)';
+    ctx.fillText(logoTag, 54, 72);
+
+    /* ── Brand tag box (arriba derecha) ── */
+    const bTxt = brandTag.toUpperCase();
+    ctx.font = '700 19px "Plus Jakarta Sans"';
+    const bTW = ctx.measureText(bTxt).width;
+    const bPad = 22, bBoxH = 34;
+    const bX = W - bTW - bPad * 2 - 54, bY = 42;
+    ctx.strokeStyle = 'rgba(200,169,110,0.75)';
+    ctx.lineWidth   = 2;
+    ctx.strokeRect(bX, bY, bTW + bPad * 2, bBoxH);
+    ctx.fillStyle = 'rgba(200,169,110,0.92)';
+    ctx.fillText(bTxt, bX + bPad, bY + 22);
+
+    /* ── Contenido inferior (construido de abajo hacia arriba) ── */
+    const PAD = 54;
+    let y = H - 52;
+
+    /* Envío */
+    ctx.font      = '700 21px "Plus Jakarta Sans"';
+    ctx.fillStyle = '#c8a96e';
+    ctx.fillText(envio.toUpperCase(), PAD, y);
+    y -= 12;
+
+    /* Precio */
+    ctx.font      = '400 118px "Bebas Neue"';
+    ctx.fillStyle = '#c8a96e';
+    y -= 112;
+    ctx.fillText(price, PAD, y);
+    y -= 24;
+
+    /* Specs */
+    ctx.font      = '300 27px "Plus Jakarta Sans"';
+    ctx.fillStyle = 'rgba(245,240,232,0.76)';
+    y = drawLinesUp(ctx, specs, PAD, y, 42);
+    y -= 22;
+
+    /* Nombre producto */
+    ctx.font      = '400 88px "Bebas Neue"';
+    ctx.fillStyle = '#f5f0e8';
+    y = drawLinesUp(ctx, nombre, PAD, y, 90);
+    y -= 22;
+
+    /* Tag pill */
+    const tagTxt = tag.toUpperCase();
+    ctx.font = '700 19px "Plus Jakarta Sans"';
+    const tW = ctx.measureText(tagTxt).width;
+    const tPad = 18, tBoxH = 32;
+    y -= tBoxH;
+    ctx.strokeStyle = '#c8a96e';
+    ctx.lineWidth   = 2;
+    ctx.strokeRect(PAD, y, tW + tPad * 2, tBoxH);
+    ctx.fillStyle = '#c8a96e';
+    ctx.fillText(tagTxt, PAD + tPad, y + 21);
+
+    /* ── Descargar ── */
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const a   = document.createElement('a');
+      a.href     = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 'image/jpeg', 0.95);
+
+  } catch(e) {
+    console.error(e);
+    if (e.message && e.message.includes('Tainted')) {
+      alert('⚠️ Para descargar con diseño, usá el servidor local.\n\nHacé doble click en:\n  📁 ABRIR-PREVIEW.bat\n\nSe abre una ventana negra y el navegador se dirige solo a la dirección correcta (localhost:8181).');
+    } else {
+      alert('Error al generar la imagen: ' + e.message);
+    }
+  } finally {
+    btn.innerHTML     = DL_ICON + ' Descargar con diseño';
+    btn.style.opacity = '';
+    btn.style.pointerEvents = '';
+  }
+}
+
+function showSection(id) {
+  document.querySelectorAll('.post-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const pills = document.querySelectorAll('.pill');
+  const map = ['overview','p1','p2','p3','p4','p5','p6','p7','p8'];
+  const idx = map.indexOf(id);
+  if (idx >= 0) pills[idx].classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleView(btn, showType, hideType, postId) {
+  btn.parentElement.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const feedEl  = document.getElementById('feed-' + postId);
+  const storyEl = document.getElementById('story-' + postId);
+  if (!feedEl || !storyEl) return;
+  if (showType === 'feed') {
+    feedEl.classList.remove('hidden'); feedEl.style.display = '';
+    storyEl.style.display = 'none';
+  } else {
+    storyEl.style.display = 'block';
+    feedEl.style.display = 'none';
+  }
+}
+
+function showSlide(postId, num, btn) {
+  for (let i = 1; i <= 3; i++) {
+    const el = document.getElementById('slide-' + postId + '-' + i);
+    if (el) el.style.display = (i === num) ? (i === 1 ? 'block' : 'block') : 'none';
+    if (i > 1 && el) el.style.position = (i === num) ? 'absolute' : 'absolute';
+  }
+  // Fix first slide position
+  const s1 = document.getElementById('slide-' + postId + '-1');
+  if (s1) s1.style.position = (num === 1) ? 'relative' : 'absolute';
+  btn.parentElement.querySelectorAll('.story-dot').forEach(d => d.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function showCaption(btn, boxId) {
+  const col = btn.closest('.caption-col');
+  col.querySelectorAll('.caption-box').forEach(b => b.classList.remove('active'));
+  col.querySelectorAll('.cap-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(boxId).classList.add('active');
+  btn.classList.add('active');
+}
+
+function switchCarousel(btn, imgId, src) {
+  document.getElementById(imgId).src = 'imagenes-catalogo-branded/' + src;
+  btn.closest('.feed-wrap').querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
