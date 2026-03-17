@@ -12,7 +12,9 @@
       "Bash(\"C:/Program Files/nodejs/node.exe\" node_modules/next/dist/bin/next dev)",
       "Bash(firebase login:add --no-localhost)",
       "Bash(firebase projects:list --account ngonzalezcuiuli@gmail.com)",
-      "Bash(firebase apphosting:backends:list --project rustic0)"
+      "Bash(firebase apphosting:backends:list --project rustic0)",
+      "Bash(firebase apphosting:rollouts:list rustico-prod --project rustic0)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://rustico-prod--rustic0.us-central1.hosted.app)"
     ]
   }
 }
