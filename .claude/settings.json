@@ -14,7 +14,21 @@
       "Bash(firebase projects:list --account ngonzalezcuiuli@gmail.com)",
       "Bash(firebase apphosting:backends:list --project rustic0)",
       "Bash(firebase apphosting:rollouts:list rustico-prod --project rustic0)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://rustico-prod--rustic0.us-central1.hosted.app)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://rustico-prod--rustic0.us-central1.hosted.app)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://rustico-prod--rustic0.us-central1.hosted.app/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/admin)",
+      "Bash(node -e \"console.log\\(''node ok''\\)\")",
+      "Read(//c/Users/nigonzalezc/AppData/Roaming/**)",
+      "Bash(cmd.exe /c \"netstat -ano | findstr \"\":3000 \"\" | findstr LISTENING\")",
+      "Bash(cmd.exe /c \"netstat -ano | findstr \"\":3001 \"\" | findstr LISTENING\")",
+      "Bash(powershell.exe -Command \"Get-NetTCPConnection -LocalPort 3000,3001 -State Listen 2>$null | Select-Object LocalPort, OwningProcess | Format-Table\")",
+      "Bash(\"/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe\" -Command \"Get-NetTCPConnection -LocalPort 3000,3001,3002 -State Listen -ErrorAction SilentlyContinue | Select-Object LocalPort, OwningProcess | Format-Table -AutoSize\")",
+      "Bash(\"/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe\" -Command \":*)",
+      "Read(//tmp/**)",
+      "Bash(\"/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe\" -Command \"Start-Process ''http://localhost:3000/admin''\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\nigonzalezc\\Desktop\\ASESOR25\\Ligthouse\\nexo\\RUSTICO\\rustico-ml"
     ]
   }
 }
