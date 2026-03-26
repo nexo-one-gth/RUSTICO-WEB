@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-
-const PASSWORD = 'rustico2026'
+import { usePathname, useRouter } from 'next/navigation'
+import { useAuth } from '@/hooks/useAuth'
+import { auth } from '@/lib/firebase'
+import { signOut } from 'firebase/auth'
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: '▦' },
@@ -16,92 +17,49 @@ const navItems = [
   { href: '/admin/metricas', label: 'Métricas', icon: '◈' },
 ]
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const [authed, setAuthed] = useState(false)
-  const [input, setInput] = useState('')
-  const [error, setError] = useState(false)
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const { user, loading } = useAuth()
+  const router = useRouter()
   const pathname = usePathname()
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
   useEffect(() => {
-    const stored = localStorage.getItem('rustico_admin_auth')
-    if (stored === 'true') setAuthed(true)
-  }, [])
-
-  function handleLogin(e: React.FormEvent) {
-    e.preventDefault()
-    if (input === PASSWORD) {
-      localStorage.setItem('rustico_admin_auth', 'true')
-      setAuthed(true)
-      setError(false)
-    } else {
-      setError(true)
-      setInput('')
+    if (!loading && !user) {
+      router.push('/login')
     }
-  }
+  }, [user, loading, router])
 
-  function handleLogout() {
-    localStorage.removeItem('rustico_admin_auth')
-    setAuthed(false)
-  }
-
-  if (!authed) {
+  if (loading) {
     return (
-      <div className="min-h-screen bg-rustico-dark flex items-center justify-center p-4">
-        <div className="bg-rustico-text w-full max-w-sm p-8 border border-rustico-brown">
-          <div className="text-center mb-8">
-            <p className="font-display text-4xl text-rustico-gold tracking-brand">RÚSTICO</p>
-            <p className="font-body text-rustico-sand text-xs tracking-brand-sm uppercase mt-2">
-              Panel Operativo
-            </p>
-          </div>
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <label className="font-body text-rustico-sand text-xs tracking-brand-sm uppercase block mb-2">
-                Contraseña
-              </label>
-              <input
-                type="password"
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                className="w-full bg-rustico-dark border border-rustico-brown text-rustico-cream font-body text-sm px-4 py-3 outline-none focus:border-rustico-gold transition-colors"
-                placeholder="Ingresá la contraseña"
-                autoFocus
-              />
-              {error && (
-                <p className="text-red-400 text-xs mt-2 font-body">Contraseña incorrecta</p>
-              )}
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-rustico-gold text-rustico-dark font-body font-bold text-xs tracking-brand-sm uppercase py-3 hover:bg-rustico-cream transition-colors"
-            >
-              Ingresar
-            </button>
-          </form>
-          <p className="text-rustico-sand text-xs text-center mt-6 font-body">
-            Contraseña por defecto: <span className="text-rustico-gold">rustico2026</span>
-          </p>
+      <div className="min-h-screen bg-[#1a1008] flex items-center justify-center">
+        <div className="text-rustico-gold font-body text-xs tracking-brand uppercase animate-pulse">
+          Verificando sesión...
         </div>
       </div>
     )
   }
 
+  if (!user) return null
+
   return (
     <div className="min-h-screen bg-[#1a1008] flex">
       {/* Sidebar */}
-      <aside className={`${sidebarOpen ? 'w-56' : 'w-14'} bg-rustico-dark border-r border-rustico-brown flex flex-col transition-all duration-300 flex-shrink-0`}>
+      <aside className={`${sidebarOpen ? 'w-56' : 'w-14'} bg-rustico-dark border-r border-rustico-brown flex flex-col transition-all duration-300 flex-shrink-0 sticky top-0 h-screen`}>
         {/* Logo */}
-        <div className="p-4 border-b border-rustico-brown flex items-center gap-3">
+        <div className="p-4 border-b border-rustico-brown flex items-center justify-between">
           {sidebarOpen && (
             <div>
               <p className="font-display text-rustico-gold text-xl tracking-brand leading-none">RÚSTICO</p>
-              <p className="font-body text-rustico-sand text-[9px] tracking-brand-sm uppercase">Panel Operativo</p>
+              <p className="font-body text-rustico-sand text-[9px] tracking-brand-sm uppercase">Admin</p>
             </div>
           )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="ml-auto text-rustico-sand hover:text-rustico-gold transition-colors text-sm"
+            className="text-rustico-sand hover:text-rustico-gold transition-colors text-sm"
           >
             {sidebarOpen ? '←' : '→'}
           </button>
@@ -131,11 +89,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Logout */}
         <div className="p-4 border-t border-rustico-brown">
           <button
-            onClick={handleLogout}
+            onClick={() => signOut(auth)}
             className="flex items-center gap-3 text-rustico-sand hover:text-red-400 text-xs font-body tracking-brand-sm uppercase transition-colors w-full"
           >
-            <span>✕</span>
-            {sidebarOpen && <span>Salir</span>}
+            <span className="text-base flex-shrink-0">✕</span>
+            {sidebarOpen && <span>Cerrar Sesión</span>}
           </button>
         </div>
       </aside>

@@ -2,7 +2,9 @@
 
 import { useState } from 'react'
 
-type Tab = 'titulos' | 'fichas' | 'facebook' | 'whatsapp'
+import PublicationPreview from '@/components/admin/PublicationPreview'
+
+type Tab = 'titulos' | 'fichas' | 'facebook' | 'whatsapp' | 'graficas'
 
 function CopyBox({ label, text }: { label: string; text: string }) {
   const [copied, setCopied] = useState(false)
@@ -205,6 +207,7 @@ export default function ContenidoPage() {
     { id: 'fichas', label: 'Ficha ML' },
     { id: 'facebook', label: 'Posts Facebook' },
     { id: 'whatsapp', label: 'Respuestas WA' },
+    { id: 'graficas', label: 'Gráficas' },
   ]
 
   return (
@@ -279,6 +282,15 @@ export default function ContenidoPage() {
             {waTemplates.map((w, i) => (
               <CopyBox key={i} label={w.label} text={w.text} />
             ))}
+          </div>
+        )}
+
+        {tab === 'graficas' && (
+          <div>
+            <p className="font-body text-rustico-sand text-xs mb-6">
+              Generador de mockups con diseño Rústico. Seleccioná un producto para previsualizar y descargar la pieza gráfica.
+            </p>
+            <PublicationPreview />
           </div>
         )}
       </div>

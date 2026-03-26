@@ -12,9 +12,10 @@
 ```
 ¡Hola! Las medidas son:
 
-RACK TV: [CM] largo x [CM] alto x [CM] profundidad
+RACK TV: [160] largo x [60 alto x [40
+ profundidad
 MESA RATONA: [CM] x [CM] x [CM] alto
-MESA DE ARRIME: [CM] x [CM] x [CM] alto
+MESA DE ARRIME: [80] x [30 x [80] alto
 
 ¿Necesitás que las adapte a un espacio en particular?
 Trabajamos por encargo y podemos personalizar. 🙌
