@@ -5,3 +5,20 @@ runConfig:
   memoryMiB: 512
   minInstances: 0
   maxInstances: 10
+
+# Configuración de variables de entorno para App Hosting
+# NOTA: Debes crear estos secretos en el panel de Firebase o Cloud Secret Manager
+# y vincularlos aquí para que el build de Next.js funcione correctamente.
+env:
+  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    value: placeholder # Reemplazar con secreto o valor real en el panel
+  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    value: placeholder
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: placeholder
+  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    value: placeholder
+  - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    value: placeholder
+  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+    value: placeholder

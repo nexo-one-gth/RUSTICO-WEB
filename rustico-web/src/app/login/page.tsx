@@ -18,6 +18,10 @@ export default function LoginPage() {
         setLoading(true)
 
         try {
+            if (!auth) {
+                setError('Error de configuración: Firebase no está inicializado.')
+                return
+            }
             await signInWithEmailAndPassword(auth, email, password)
             router.push('/admin')
         } catch (err: any) {

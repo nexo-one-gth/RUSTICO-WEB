@@ -1,7 +1,7 @@
-import { initializeApp, getApps, getApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
-import { getStorage } from 'firebase/storage'
-import { getAuth } from 'firebase/auth'
+import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app'
+import { getFirestore, Firestore } from 'firebase/firestore'
+import { getStorage, FirebaseStorage } from 'firebase/storage'
+import { getAuth, Auth } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,10 +12,25 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
-// Evitar re-inicializar en hot-reload de Next.js
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig)
+// Check if we have at least an API key to avoid "auth/invalid-api-key" during build
+const isConfigValid = !!firebaseConfig.apiKey && firebaseConfig.apiKey !== 'placeholder'
 
-export const db = getFirestore(app)
-export const storage = getStorage(app)
-export const auth = getAuth(app)
+let app: FirebaseApp | undefined
+let db: Firestore | undefined
+let storage: FirebaseStorage | undefined
+let auth: Auth | undefined
+
+if (isConfigValid) {
+  app = getApps().length ? getApp() : initializeApp(firebaseConfig)
+  db = getFirestore(app)
+  storage = getStorage(app)
+  auth = getAuth(app)
+} else {
+  // During build or if env vars are missing, we log a warning instead of crashing
+  if (process.env.NODE_ENV === 'development') {
+    console.warn('Firebase configuration is missing or invalid. Check your .env file.')
+  }
+}
+
+export { app, db, storage, auth }
 export default app

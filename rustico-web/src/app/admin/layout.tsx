@@ -89,7 +89,7 @@ export default function AdminLayout({
         {/* Logout */}
         <div className="p-4 border-t border-rustico-brown">
           <button
-            onClick={() => signOut(auth)}
+            onClick={() => auth && signOut(auth)}
             className="flex items-center gap-3 text-rustico-sand hover:text-red-400 text-xs font-body tracking-brand-sm uppercase transition-colors w-full"
           >
             <span className="text-base flex-shrink-0">✕</span>
