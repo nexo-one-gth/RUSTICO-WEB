@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { LeadFormData } from '@/types'
 import clsx from 'clsx'
 
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '5491128054509'
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '5491123677587'
 
 const INITIAL: LeadFormData = {
   nombre: '',
