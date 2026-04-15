@@ -5,14 +5,14 @@ import { CATEGORY_LABELS } from '@/lib/products'
 import LogoAnimated from './LogoAnimated'
 
 const NAV_LINKS = [
-  { label: 'Aparadores',  href: '#aparadores' },
-  { label: 'Muebles TV',  href: '#muebles-tv' },
-  { label: 'Mesas',       href: '#mesas-ratona' },
-  { label: 'Cocina',      href: '#cocina' },
-  { label: 'Catálogo',    href: '#catalogo' },
+  { label: 'Aparadores', href: '#aparadores' },
+  { label: 'Muebles TV', href: '#muebles-tv' },
+  { label: 'Mesas', href: '#mesas-ratona' },
+  { label: 'Cocina', href: '#cocina' },
+  { label: 'Catálogo', href: '#catalogo' },
 ]
 
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '5491100000000'
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '5491128054509'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)

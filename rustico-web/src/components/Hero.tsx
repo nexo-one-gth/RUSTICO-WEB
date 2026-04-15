@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '5491100000000'
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '5491128054509'
 
 export default function Hero() {
   return (

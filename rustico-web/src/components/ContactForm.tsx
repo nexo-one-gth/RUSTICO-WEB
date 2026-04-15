@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { LeadFormData } from '@/types'
 import clsx from 'clsx'
 
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '5491100000000'
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '5491128054509'
 
 const INITIAL: LeadFormData = {
   nombre: '',
@@ -14,8 +14,8 @@ const INITIAL: LeadFormData = {
 }
 
 export default function ContactForm() {
-  const [form, setForm]       = useState<LeadFormData>(INITIAL)
-  const [status, setStatus]   = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [form, setForm] = useState<LeadFormData>(INITIAL)
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
